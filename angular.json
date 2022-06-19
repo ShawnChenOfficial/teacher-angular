@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "teacher": {
+    "teacher-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/teacher",
+            "outputPath": "dist/teacher-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "teacher:build"
+            "browserTarget": "teacher-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "teacher:build:production"
+              "browserTarget": "teacher-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "teacher:build"
+            "browserTarget": "teacher-angular:build"
           }
         },
         "test": {
@@ -117,18 +117,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "teacher:serve"
+            "devServerTarget": "teacher-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "teacher:serve:production"
+              "devServerTarget": "teacher-angular:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "teacher",
+  "defaultProject": "teacher-angular",
   "cli": {
     "analytics": "9208c78f-5203-4c5f-8512-2356bb1fc457"
   }
