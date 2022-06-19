@@ -1,0 +1,6 @@
+<app-search></app-search>
+<div class="content-width m-auto pb-5">
+    <app-categories (selectCategoryEvent)="selectCategory($event)"></app-categories>
+    <app-latest-posts *ngIf="!selectedCategory"></app-latest-posts>
+    <app-single-category-post *ngIf="selectedCategory" [category]="selectedCategory"></app-single-category-post>
+</div>

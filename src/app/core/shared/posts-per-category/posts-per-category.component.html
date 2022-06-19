@@ -1,0 +1,6 @@
+<div>
+  <h5>{{ category.name }}</h5>
+  <div class="row">
+    <app-post-card class="col-3" *ngFor="let item of list" [category]="category"></app-post-card>
+  </div>
+</div>
