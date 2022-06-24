@@ -4,8 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { NavComponent } from './base/nav/nav.component';
-import { ContentComponent } from './base/content/content.component';
+import { NavComponent } from './common/components/nav/nav.component';
+import { ContentComponent } from './common/components/content/content.component';
 import { SearchComponent } from './core/shared/search/search.component';
 import { HomeComponent } from './core/home/home.component';
 import { LatestPostsComponent } from './core/home/latest-posts/latest-posts.component';
@@ -14,6 +14,11 @@ import { PostsPerCategoryComponent } from './core/shared/posts-per-category/post
 import { SingleCategoryPostComponent } from './core/home/single-category-post/single-category-post.component';
 import { CategoriesComponent } from './core/home/categories/categories.component';
 import { CategoryService } from './core/home/categories/services/category.service';
+import { HttpService } from './auth/services/http.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RequestInterceptor } from './auth/interceptors/http.interceptor';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegisterComponent } from './core/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +32,19 @@ import { CategoryService } from './core/home/categories/services/category.servic
     PostCardComponent,
     SingleCategoryPostComponent,
     CategoriesComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
-  imports: [
-    BrowserModule,
-    FlexLayoutModule,
-    AppRoutingModule
+  imports: [BrowserModule, FlexLayoutModule, AppRoutingModule],
+  providers: [
+    CategoryService,
+    HttpService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    },
   ],
-  providers: [CategoryService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
