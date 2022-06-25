@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  baseEndPoint: 'http://locahost:13705',
   production: false
 };
 

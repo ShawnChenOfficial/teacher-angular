@@ -15,10 +15,20 @@ import { SingleCategoryPostComponent } from './core/home/single-category-post/si
 import { CategoriesComponent } from './core/home/categories/categories.component';
 import { CategoryService } from './core/home/categories/services/category.service';
 import { HttpService } from './auth/services/http.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './auth/interceptors/http.interceptor';
 import { LoginComponent } from './core/auth/login/login.component';
 import { RegisterComponent } from './core/auth/register/register.component';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './auth/services/auth.service';
+import { TokenService } from './auth/services/token.service';
+import { ToastComponent } from './common/components/toast/toast.component';
+import { ToastListComponent } from './common/components/toast-list/toast-list.component';
+import { ToastService } from './common/services/toast.service';
+import { RegisterPersonalComponent } from './core/auth/register/register-personal/register-personal.component';
+import { RegisterOrganizationComponent } from './core/auth/register/register-organization/register-organization.component';
+import { RegisterPersonalDetailsComponent } from './core/auth/register/register-personal/register-personal-details/register-personal-details.component';
+import { RegisterOrganizationDetailsComponent } from './core/auth/register/register-organization/register-organization-details/register-organization-details.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +44,20 @@ import { RegisterComponent } from './core/auth/register/register.component';
     CategoriesComponent,
     LoginComponent,
     RegisterComponent,
+    ToastComponent,
+    ToastListComponent,
+    RegisterPersonalComponent,
+    RegisterOrganizationComponent,
+    RegisterPersonalDetailsComponent,
+    RegisterOrganizationDetailsComponent,
   ],
-  imports: [BrowserModule, FlexLayoutModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    FlexLayoutModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+  ],
   providers: [
     CategoryService,
     HttpService,
@@ -44,6 +66,9 @@ import { RegisterComponent } from './core/auth/register/register.component';
       useClass: RequestInterceptor,
       multi: true,
     },
+    AuthService,
+    TokenService,
+    ToastService
   ],
   bootstrap: [AppComponent],
 })

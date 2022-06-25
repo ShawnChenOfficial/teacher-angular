@@ -6,7 +6,6 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { request } from 'http';
 import { Observable, Subscriber } from 'rxjs';
 import { LOGIN_ROUTE } from '../persistence/login-route';
 import { AuthService } from '../services/auth.service';
@@ -51,19 +50,21 @@ export class RequestInterceptor implements HttpInterceptor {
             });
             // Pass the request along
             handler.handle(req).subscribe(successHandler, errorHandler, completeHandler);
-          })
+          },
+          error => {
+            if(error.status == 400){
+              this.authService.logOut();
+            }
+            else{
+              errorHandler(error);
+            }
+          });
         }
       }
       else{
-        if(req.noHeaders){
-          req = req.clone({
-            setHeaders:{}
-          });
-        }
-        else{
-          errorHandler('unknow access type');
-        }
-
+        req = req.clone({
+          setHeaders:{}
+        });
         handler.handle(req).subscribe(successHandler, errorHandler, completeHandler);
       }
     });

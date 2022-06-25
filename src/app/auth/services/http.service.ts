@@ -5,7 +5,6 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { HttpInterceptorHandler } from '../interceptors/http.interceptor.handler';
 
 @Injectable()

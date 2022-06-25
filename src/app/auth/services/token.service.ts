@@ -10,15 +10,15 @@ import {
   TOKEN_ROLES,
   TOKEN_USERID,
 } from 'src/app/auth/persistence/tokens';
-import { Environment } from 'src/app/common/presistence/environment';
+import { environment } from 'src/environments/environment';
 import { AuthRole } from '../models/auth.role';
 import { AuthToken } from '../models/auth.token';
 
 @Injectable()
 export class TokenService {
-  private token?: Subject<AuthToken>;
+  private token: Subject<AuthToken> | null = null;
 
-  constructor(private http: HttpClient, private environment: Environment) {}
+  constructor(private http: HttpClient) {}
 
   getAccessToken(username: string, password: string) {
     let params = new HttpParams();
@@ -29,7 +29,7 @@ export class TokenService {
 
     return new Observable((sub: Subscriber<any>) => {
       this.http
-        .post(this.environment.baseEndPoint + '/api/account/token', params)
+        .post(environment.baseEndPoint + '/api/account/token', params)
         .subscribe((token) => {
           this.saveToken(token);
         }, error =>{
@@ -41,7 +41,7 @@ export class TokenService {
   getToken(): Observable<AuthToken> {
     return new Observable((sub: Subscriber<AuthToken>) => {
       if (!this.hasToken()) {
-        sub.error('try login');
+        sub.error('plase login');
       }
       if (this.tokenExpired()) {
         this.refreshToken().subscribe(
@@ -81,6 +81,7 @@ export class TokenService {
     );
   }
 
+  // refresh access token base on current refresh token and save to local storage
   private refreshToken(): Subject<AuthToken> {
     var refresh_token = this.getRefreshToken();
 
@@ -91,7 +92,7 @@ export class TokenService {
     params = params.set('refresh_token', refresh_token!);
 
     this.http
-      .post(this.environment.baseEndPoint + 'api/account/token', params)
+      .post(environment.baseEndPoint + 'api/account/token', params)
       .subscribe(
         (response) => {
           this.saveToken(response);
@@ -99,9 +100,8 @@ export class TokenService {
           return this.token;
         },
         (error) => {
-          console.warn('invalid refresh token', error, params);
           this.token!.error(error);
-          this.token = undefined;
+          this.token = null;
         }
       );
 
@@ -137,7 +137,7 @@ export class TokenService {
     token.roles = localStorage
       .getItem(TOKEN_ROLES)!
       .split(',')
-      .map((m) => AuthRole[m]);
+      .map((m) => m as AuthRole);
     token.expires = new Date(localStorage.getItem(TOKEN_EXPIRES)!);
     return token;
   }

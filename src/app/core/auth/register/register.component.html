@@ -1,1 +1,12 @@
-<p>register works!</p>
+<div fxlayoutalign="center center" class="h-100 sreen-center" [hidden]="shownPurposePage">
+  <div class="purpose">
+    <h3 class="mb-3">Kia Ora! Register for XXX</h3>
+    <p class="pb-4">What's the main purpose for the account?</p>
+    <a class="btn btn-primary mb-2 w-100" routerLink="personal">Personal</a>
+    <a class="btn btn-primary w-100" routerLink="organization">Organization</a>
+  </div>
+</div>
+
+<div class="h-100" [hidden]="!shownPurposePage">
+    <router-outlet></router-outlet>
+</div>

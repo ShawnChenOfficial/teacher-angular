@@ -1,6 +1,6 @@
 export enum AuthRole {
-  Admin,
-  OrganizationAdmin,
-  OrganizationUser,
-  User,
+  Admin = 'Admin',
+  OrganizationAdmin = 'OrganizationAdmin',
+  OrganizationUser = 'OrganizationUser',
+  User = 'User',
 }

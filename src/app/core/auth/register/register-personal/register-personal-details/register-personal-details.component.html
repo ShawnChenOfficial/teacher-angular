@@ -1,0 +1,119 @@
+<div fxlayoutalign="center center" class="h-100 sreen-center">
+  <form class="details">
+    <h3 class="mb-3">Tell us more about yourself</h3>
+    <div class="form-group mb-3">
+      <label for="firstName">First name</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="firstName"
+        placeholder="First name"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="lastname">Lastname</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="lastname"
+        placeholder="Lastname"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="title"
+        placeholder="Perferred title"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="gender">Gender</label>
+      <select id="gender" class="form-control mb-3">
+        <option selected>Select gender</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="dob">Date of birth</label>
+      <div id="dob" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="me-3">
+          <select class="form-control">
+            <option selected>Select month</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="align-middle pt-1">-</div>
+        <div class="ms-3 me-3">
+          <select class="form-control">
+            <option selected>Select day</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="align-middle pt-1">-</div>
+        <div class="ms-3">
+          <select class="form-control">
+            <option selected>Select year</option>
+            <option value="2000">2000</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="phone">Phone</label>
+      <div id="phone" class="row w-100">
+        <div class="col-3" fxLayout="row" fxLayoutAlign="space-between">
+          <div class="align-middle pt-1 pe-1">(</div>
+          <select class="form-control">
+            <option selected>Select</option>
+            <option value="021">021</option>
+            <option value="022">022</option>
+            <option value="027">027</option>
+          </select>
+          <div class="align-middle pt-1 ps-1">)</div>
+        </div>
+        <div class="align-middle pt-1 col-1">-</div>
+        <div class="col-8">
+          <input
+            type="text"
+            required
+            class="form-control"
+            id="title"
+            placeholder="Perferred title"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="city">City</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="city"
+        placeholder="City"
+      />
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button type="button" class="btn btn-primary" routerLink="..">
+        Back
+      </button>
+      <button type="submit" class="btn btn-primary" routerLink="/">Submit</button>
+    </div>
+  </form>
+</div>
