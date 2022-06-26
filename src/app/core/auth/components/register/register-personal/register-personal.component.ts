@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RegisterPersonalEdit } from '../../../models/edits/register-personal';
+import { RegisterDataService } from '../../../services/register-data.service';
 
 @Component({
   selector: 'app-register-personal',
@@ -8,9 +10,13 @@ import { Router } from '@angular/router';
 })
 export class RegisterPersonalComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  edit: RegisterPersonalEdit = new RegisterPersonalEdit();
+
+  constructor(private router: Router, private registerDataService: RegisterDataService) { }
 
   ngOnInit(): void {
+    this.registerDataService.clear();
+    this.edit = this.registerDataService.getPersonalEdit();
   }
 
   get showDetails() {

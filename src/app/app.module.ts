@@ -14,21 +14,22 @@ import { PostsPerCategoryComponent } from './core/shared/posts-per-category/post
 import { SingleCategoryPostComponent } from './core/home/single-category-post/single-category-post.component';
 import { CategoriesComponent } from './core/home/categories/categories.component';
 import { CategoryService } from './core/home/categories/services/category.service';
-import { HttpService } from './auth/services/http.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RequestInterceptor } from './auth/interceptors/http.interceptor';
-import { LoginComponent } from './core/auth/login/login.component';
-import { RegisterComponent } from './core/auth/register/register.component';
+import { RequestInterceptor } from '../../projects/auth/src/interceptors/http.interceptor';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './auth/services/auth.service';
-import { TokenService } from './auth/services/token.service';
 import { ToastComponent } from './common/components/toast/toast.component';
 import { ToastListComponent } from './common/components/toast-list/toast-list.component';
 import { ToastService } from './common/services/toast.service';
-import { RegisterPersonalComponent } from './core/auth/register/register-personal/register-personal.component';
-import { RegisterOrganizationComponent } from './core/auth/register/register-organization/register-organization.component';
-import { RegisterPersonalDetailsComponent } from './core/auth/register/register-personal/register-personal-details/register-personal-details.component';
-import { RegisterOrganizationDetailsComponent } from './core/auth/register/register-organization/register-organization-details/register-organization-details.component';
+import { LoginComponent } from './core/auth/components/login/login.component';
+import { RegisterComponent } from './core/auth/components/register/register.component';
+import { RegisterPersonalComponent } from './core/auth/components/register/register-personal/register-personal.component';
+import { RegisterOrganizationComponent } from './core/auth/components/register/register-organization/register-organization.component';
+import { RegisterPersonalDetailsComponent } from './core/auth/components/register/register-personal/register-personal-details/register-personal-details.component';
+import { RegisterOrganizationDetailsComponent } from './core/auth/components/register/register-organization/register-organization-details/register-organization-details.component';
+import { AuthModule } from 'projects/auth/src/auth.module';
+import { environment } from 'src/environments/environment';
+import { RegisterDataService } from './core/auth/services/register-data.service';
+import { RegisterApiService } from './core/auth/services/register.service';
 
 @NgModule({
   declarations: [
@@ -57,18 +58,14 @@ import { RegisterOrganizationDetailsComponent } from './core/auth/register/regis
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    /* libraries */
+    AuthModule.forRoot(environment)
   ],
   providers: [
     CategoryService,
-    HttpService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RequestInterceptor,
-      multi: true,
-    },
-    AuthService,
-    TokenService,
-    ToastService
+    RegisterDataService,
+    RegisterApiService,
+    ToastService,
   ],
   bootstrap: [AppComponent],
 })

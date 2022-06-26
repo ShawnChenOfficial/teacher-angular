@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, Subject, Subscriber } from 'rxjs';
 import {
   TOKEN_ACCESS,
@@ -9,8 +9,7 @@ import {
   TOKEN_REFRESH,
   TOKEN_ROLES,
   TOKEN_USERID,
-} from 'src/app/auth/persistence/tokens';
-import { environment } from 'src/environments/environment';
+} from 'projects/auth/src/persistence/tokens';
 import { AuthRole } from '../models/auth.role';
 import { AuthToken } from '../models/auth.token';
 
@@ -18,7 +17,7 @@ import { AuthToken } from '../models/auth.token';
 export class TokenService {
   private token: Subject<AuthToken> | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, @Inject('environment') private environment : any) {}
 
   getAccessToken(username: string, password: string) {
     let params = new HttpParams();
@@ -29,7 +28,7 @@ export class TokenService {
 
     return new Observable((sub: Subscriber<any>) => {
       this.http
-        .post(environment.baseEndPoint + '/api/account/token', params)
+        .post(this.environment.baseEndPoint + '/api/account/token', params)
         .subscribe((token) => {
           this.saveToken(token);
         }, error =>{
@@ -92,7 +91,7 @@ export class TokenService {
     params = params.set('refresh_token', refresh_token!);
 
     this.http
-      .post(environment.baseEndPoint + 'api/account/token', params)
+      .post(this.environment.baseEndPoint + 'api/account/token', params)
       .subscribe(
         (response) => {
           this.saveToken(response);

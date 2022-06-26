@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { AuthService } from 'projects/auth/src/services/auth.service';
 import { ToastEventType } from 'src/app/common/models/toast';
 import { ToastService } from 'src/app/common/services/toast.service';
 
