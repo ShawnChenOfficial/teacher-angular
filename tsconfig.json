@@ -5,6 +5,9 @@
     "paths": {
       "auth": [
         "dist/auth"
+      ],
+      "validation": [
+        "dist/validation"
       ]
     },
     "strictPropertyInitialization":false,

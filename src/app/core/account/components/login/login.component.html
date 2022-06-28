@@ -3,11 +3,11 @@
         <h3 class="mb-3">Login</h3>
         <div class="form-group mb-3">
           <label for="email">Email address</label>
-          <input type="email" required class="form-control" id="email" placeholder="Enter email" [(ngModel)]="username">
+          <input form-validation="required email" type="email" required class="form-control" id="email" placeholder="Enter email" [(ngModel)]="username">
         </div>
         <div class="form-group mb-3">
           <label for="password">Password</label>
-          <input type="password" required class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
+          <input form-validation="required password"  type="password" required class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
         </div>
         <p class="mb-3"><a routerLink="">Forgot your password?</a></p>
         <button type="submit" class="btn btn-primary w-100" (click)="tryLogin()">Submit</button>

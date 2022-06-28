@@ -157,6 +157,37 @@
           }
         }
       }
+    },
+    "validation": {
+      "projectType": "library",
+      "root": "projects/validation",
+      "sourceRoot": "projects/validation/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/validation/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/validation/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/validation/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/validation/src/test.ts",
+            "tsConfig": "projects/validation/tsconfig.spec.json",
+            "karmaConfig": "projects/validation/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "teacher-angular",

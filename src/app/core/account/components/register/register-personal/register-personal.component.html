@@ -7,11 +7,11 @@
         </div>
         <div class="form-group mb-3">
           <label for="password">Password</label>
-          <input type="password" required class="form-control" id="password" placeholder="Password" [(ngModel)]="edit.password">
+          <input form-validation="required" type="password" required class="form-control" id="password" placeholder="Password" [(ngModel)]="edit.password">
         </div>
         <div class="form-group mb-3">
           <label for="re-password">Password</label>
-          <input type="password" required class="form-control" id="re-password" placeholder="Your password again" [(ngModel)]="edit.re_password">
+          <input form-validation="required" type="password" required class="form-control" id="re-password" placeholder="Your password again" [(ngModel)]="edit.re_password">
         </div>
         <div class="form-group mb-3">
           <label for="username">Username</label>
@@ -19,7 +19,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between">
           <button type="button" class="btn btn-primary" routerLink="..">Back</button>
-          <button type="submit" class="btn btn-primary" [routerLink]="['details', edit]">Submit</button>
+          <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
         </div>
       </form>
   </div>

@@ -20,7 +20,6 @@ export class AuthService {
           loginSub.complete();
         },
         (er: HttpErrorResponse) => {
-          console.log(er.status);
           if (er.status == 400) {
             loginSub.error('Invalid email or password');
           } else {

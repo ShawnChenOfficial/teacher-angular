@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterPersonalEdit } from 'src/app/core/auth/models/edits/register-personal';
-import { UserGender } from 'src/app/core/auth/models/views/user-gender';
-import { RegisterDataService } from 'src/app/core/auth/services/register-data.service';
+import { RegisterPersonalEdit } from 'src/app/core/account/models/edits/register-personal';
+import { UserGender } from 'src/app/core/account/models/views/user-gender';
+import { RegisterDataService } from 'src/app/core/account/services/register-data.service';
 
 @Component({
   selector: 'app-register-personal-details',

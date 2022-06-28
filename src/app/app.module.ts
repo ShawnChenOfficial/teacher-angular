@@ -20,16 +20,17 @@ import { FormsModule } from '@angular/forms';
 import { ToastComponent } from './common/components/toast/toast.component';
 import { ToastListComponent } from './common/components/toast-list/toast-list.component';
 import { ToastService } from './common/services/toast.service';
-import { LoginComponent } from './core/auth/components/login/login.component';
-import { RegisterComponent } from './core/auth/components/register/register.component';
-import { RegisterPersonalComponent } from './core/auth/components/register/register-personal/register-personal.component';
-import { RegisterOrganizationComponent } from './core/auth/components/register/register-organization/register-organization.component';
-import { RegisterPersonalDetailsComponent } from './core/auth/components/register/register-personal/register-personal-details/register-personal-details.component';
-import { RegisterOrganizationDetailsComponent } from './core/auth/components/register/register-organization/register-organization-details/register-organization-details.component';
+import { LoginComponent } from './core/account/components/login/login.component';
+import { RegisterComponent } from './core/account/components/register/register.component';
+import { RegisterPersonalComponent } from './core/account/components/register/register-personal/register-personal.component';
+import { RegisterOrganizationComponent } from './core/account/components/register/register-organization/register-organization.component';
+import { RegisterPersonalDetailsComponent } from './core/account/components/register/register-personal/register-personal-details/register-personal-details.component';
+import { RegisterOrganizationDetailsComponent } from './core/account/components/register/register-organization/register-organization-details/register-organization-details.component';
 import { AuthModule } from 'projects/auth/src/auth.module';
 import { environment } from 'src/environments/environment';
-import { RegisterDataService } from './core/auth/services/register-data.service';
-import { RegisterApiService } from './core/auth/services/register.service';
+import { RegisterDataService } from './core/account/services/register-data.service';
+import { RegisterApiService } from './core/account/services/register.service';
+import { ValidationModule } from 'projects/validation/src/validation.module';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { RegisterApiService } from './core/auth/services/register.service';
     FormsModule,
     HttpClientModule,
     /* libraries */
-    AuthModule.forRoot(environment)
+    AuthModule.forRoot(environment),
+    ValidationModule
   ],
   providers: [
     CategoryService,
