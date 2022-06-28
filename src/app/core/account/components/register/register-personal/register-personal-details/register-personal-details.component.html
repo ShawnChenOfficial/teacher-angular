@@ -1,0 +1,91 @@
+<div fxlayoutalign="center center" class="h-100 sreen-center">
+  <form class="details">
+    <h3 class="mb-3">Tell us more about yourself</h3>
+    <div class="form-group mb-3">
+      <label for="firstName">First name</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="firstName"
+        placeholder="First name"
+        [(ngModel)]="edit.firstname"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="lastname">Lastname</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="lastname"
+        placeholder="Lastname"
+        [(ngModel)]="edit.lastname"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="title"
+        placeholder="Perferred title"
+        [(ngModel)]="edit.title"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="gender">Gender</label>
+      <select id="gender" class="form-control mb-3" [(ngModel)]="edit.gender">
+        <option *ngFor="let gender of genderOptions" [value]="genderOptions[0]">{{gender}}</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="phone">Phone</label>
+      <div id="phone" class="row w-100">
+        <div class="col-3" fxLayout="row" fxLayoutAlign="space-between">
+          <div class="align-middle pt-1 pe-1">(</div>
+          <select class="form-control" [(ngModel)]="edit.phonePrefix">
+            <option selected [value]="null">Select</option>
+            <option value="021">021</option>
+            <option value="022">022</option>
+            <option value="027">027</option>
+          </select>
+          <div class="align-middle pt-1 ps-1">)</div>
+        </div>
+        <div class="align-middle pt-1 col-1">-</div>
+        <div class="col-8">
+          <input
+            type="text"
+            required
+            class="form-control"
+            id="title"
+            placeholder="Phone number"
+            [(ngModel)]="edit.phone"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="city">City</label>
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="city"
+        placeholder="City"
+        [(ngModel)]="edit.city"
+      />
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button type="button" class="btn btn-primary" routerLink="..">
+        Back
+      </button>
+      <button type="submit" class="btn btn-primary" (click)="submit()">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,9 @@
+.purpose {
+    width: 350px;
+  }
+  
+  @media (max-width: 500px) {
+    .purpose {
+      width: 90%;
+    }
+  }

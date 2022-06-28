@@ -1,0 +1,8 @@
+<div class="toaster position-fixed bottom-0 end-0 px-3 py-2 m-16">
+    <div class="pb-2" *ngFor="let toast of currentToasts; index as i">
+      <app-toast
+        [toastEvent]="toast"
+        (disposeEvent)="dispose(i)"
+      ></app-toast>
+    </div>
+  </div>
