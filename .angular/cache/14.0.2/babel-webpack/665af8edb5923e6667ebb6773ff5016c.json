@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class CategoryView {\n  constructor(name, active) {\n    this.isLoading = false;\n    this.name = name;\n    this.active = active;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
