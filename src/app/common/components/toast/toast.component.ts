@@ -31,6 +31,18 @@ export class ToastComponent implements OnInit {
     return this.toastEvent.type == this.toastEventType.Success;
   }
 
+  get getMessages(){
+    return this.toastEvent.message as Array<string>;
+  }
+
+  get getMessage(){
+    return this.toastEvent.message;
+  }
+
+  get isSingleMessage(){
+    return !Array.isArray(this.toastEvent.message);
+  }
+
   show() {
     this.toast = new Toast(
       this.toastEl.nativeElement,

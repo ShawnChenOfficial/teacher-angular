@@ -9,7 +9,7 @@ export class RegisterPersonalPost {
   firstname: string;
   lastname: string;
   title: string;
-  gender: UserGender;
+  gender: string;
   dob: Date;
   phone: string;
   city: string;
@@ -22,7 +22,7 @@ export class RegisterPersonalPost {
     this.firstname = edit.firstname;
     this.lastname = edit.lastname;
     this.title = edit.title;
-    this.gender = edit.gender!;
+    this.gender = UserGender[edit.gender as any];
     this.phone = `${edit.phonePrefix}${edit.phone}`;
     this.city = edit.city;
   }

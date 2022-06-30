@@ -15,10 +15,11 @@ import { ValidatorService } from '../services/validator.service';
   selector: '[form-validation]',
   exportAs: 'form-validation',
 })
-export class ValidationDirective implements OnInit {
+export class ValidationDirective implements OnInit, DoCheck {
   element: HTMLInputElement;
   label: HTMLSpanElement;
   validators: Array<Validator>;
+  startTyping = false;
 
   constructor(
     private el: ElementRef,
@@ -41,7 +42,14 @@ export class ValidationDirective implements OnInit {
 
   @HostListener('input')
   onInput() {
+    this.startTyping = true;
     this.validate();
+  }
+
+  ngDoCheck(): void {
+    if(this.startTyping){
+      this.validate();
+    }
   }
 
   onChange() {
@@ -70,7 +78,7 @@ export class ValidationDirective implements OnInit {
     this.label = label;
   }
 
-  validate() {
+  validate(focusCheck = false) {
     let result: ValidatorResult | undefined;
 
     // validate all validator for one input
@@ -80,7 +88,6 @@ export class ValidationDirective implements OnInit {
         result = validateReuslt;
       }
     });
-
     if (result != null && !result.isValid) {
       this.label.style.height = '';
       this.label.style.opacity = '';

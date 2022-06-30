@@ -20,13 +20,25 @@
       aria-label="Close"
     ></button>
   </div>
-  <div
-    class="toast-body text-light"
-    [ngClass]="{
-      'toast-success-body': isSuccess,
-      'toast-error-body': !isSuccess
-    }"
-  >
-    {{ toastEvent.message }}
-  </div>
+  <ng-container *ngIf="isSingleMessage">
+    <div
+      class="toast-body text-light"
+      [ngClass]="{
+        'toast-success-body': isSuccess,
+        'toast-error-body': !isSuccess
+      }"
+    >
+      {{ getMessage }}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isSingleMessage">
+    <div
+      class="toast-body text-light"
+      [ngClass]="{
+        'toast-success-body': isSuccess,
+        'toast-error-body': !isSuccess
+      }">
+      <span *ngFor="let error of getMessages">{{ error }}</span>
+    </div>
+  </ng-container>
 </div>

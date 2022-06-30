@@ -4,7 +4,7 @@ export enum ToastEventType{
 }
 
 export class ToastEvent{
-    message!: string;
+    message!: string | string[];
     title!: string;
     type!: ToastEventType;
 }

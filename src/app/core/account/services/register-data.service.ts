@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subscriber } from 'rxjs';
 import { ToastEventType } from 'src/app/common/models/toast';
 import { ToastService } from 'src/app/common/services/toast.service';
 import { RegisterPersonalEdit } from '../models/edits/register-personal';
@@ -10,7 +11,10 @@ export class RegisterDataService {
   private _personalEdit: RegisterPersonalEdit | null;
   private _organizationEdit: null;
 
-  constructor(private apiService: RegisterApiService, private toastService: ToastService) {}
+  constructor(
+    private apiService: RegisterApiService,
+    private toastService: ToastService
+  ) {}
 
   getPersonalEdit() {
     if (this._personalEdit == null) {
@@ -29,13 +33,36 @@ export class RegisterDataService {
   }
 
   registerPersonalAccount() {
-    this.apiService.registerPersonalAccount(new RegisterPersonalPost(this._personalEdit!))
-    .subscribe(res => {
-      this.toastService.show('Register success', 'We have sent out a validation email, please check in your email', ToastEventType.Success);
-    }, error =>{
-      console.log(error);
-        this.toastService.show('Register failed', error, ToastEventType.Error);
-    })
+    return new Observable<any>((sub: Subscriber<any>) => {
+      this.apiService
+        .registerPersonalAccount(new RegisterPersonalPost(this._personalEdit!))
+        .subscribe({
+          next: (res) => {
+            if (res) {
+              this.toastService.show(
+                'Register success',
+                'We have sent out a validation email, please check in your email',
+                ToastEventType.Success
+              );
+            } else {
+              this.toastService.show(
+                'Register failed',
+                'Unexpected error',
+                ToastEventType.Error
+              );
+            }
+            return res;
+          },
+          error: (error) => {
+            this.toastService.show(
+              'Register failed',
+              error.error,
+              ToastEventType.Error
+            );
+            return error;
+          },
+        });
+    });
   }
 
   registerOrganizationAccount() {}

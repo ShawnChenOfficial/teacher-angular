@@ -4,6 +4,7 @@
     <div class="form-group mb-3">
       <label for="firstName">First name</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"
@@ -15,6 +16,7 @@
     <div class="form-group mb-3">
       <label for="lastname">Lastname</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"
@@ -26,6 +28,7 @@
     <div class="form-group mb-3">
       <label for="title">Title</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"
@@ -37,30 +40,35 @@
     <div class="form-group mb-3">
       <label for="gender">Gender</label>
       <select id="gender" class="form-control mb-3" [(ngModel)]="edit.gender">
-        <option *ngFor="let gender of genderOptions" [value]="genderOptions[0]">{{gender}}</option>
+        <option
+          *ngFor="let gender of genderOptions; let i = index"
+          [value]="i"
+          [selected]="edit.gender"
+        >
+          {{ gender }}
+        </option>
       </select>
     </div>
 
     <div class="form-group mb-3">
       <label for="phone">Phone</label>
-      <div id="phone" class="row w-100">
-        <div class="col-3" fxLayout="row" fxLayoutAlign="space-between">
-          <div class="align-middle pt-1 pe-1">(</div>
+      <div id="phone" class="row w-100 mx-0">
+        <div class="col-4 ps-0">
           <select class="form-control" [(ngModel)]="edit.phonePrefix">
-            <option selected [value]="null">Select</option>
-            <option value="021">021</option>
-            <option value="022">022</option>
-            <option value="027">027</option>
+            <option
+              *ngFor="let phonePrefix of phonePrefixOptions"
+              [ngValue]="phonePrefix"
+            >
+              {{ phonePrefix }}
+            </option>
           </select>
-          <div class="align-middle pt-1 ps-1">)</div>
         </div>
         <div class="align-middle pt-1 col-1">-</div>
-        <div class="col-8">
+        <div class="col-7 pr-0">
           <input
             type="text"
-            required
             class="form-control"
-            id="title"
+            id="phone"
             placeholder="Phone number"
             [(ngModel)]="edit.phone"
           />
@@ -70,6 +78,7 @@
     <div class="form-group mb-3">
       <label for="city">City</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"

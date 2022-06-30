@@ -29,7 +29,7 @@ export class RegisterPersonalComponent implements OnInit {
       return;
     }
     else{
-      this.router.navigate(['details']);
+      this.router.navigate(['account', 'register', 'personal', 'details']);
     }
   }
 
