@@ -1,0 +1,6 @@
+<button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="isLoading">
+    <div *ngIf="isLoading" role="status" class="spinner-border text-light me-1">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <span>Submit</span>
+  </button>

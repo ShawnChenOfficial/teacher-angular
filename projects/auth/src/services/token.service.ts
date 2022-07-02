@@ -31,6 +31,7 @@ export class TokenService {
         .post(this.environment.baseEndPoint + '/api/account/token', params)
         .subscribe((token) => {
           this.saveToken(token);
+          sub.next();
         }, error =>{
           sub.error(error);
         });

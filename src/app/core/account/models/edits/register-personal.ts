@@ -9,7 +9,10 @@ export class RegisterPersonalEdit {
   lastname: string;
   title: string;
   gender: UserGender;
-  phonePrefix?: string;
   phone: string;
   city: string;
+
+  get hasAccountInfo(){
+    return this.email && this.password && this.re_password && this.username;
+  }
 }

@@ -51,7 +51,7 @@ export class RegisterDataService {
                 ToastEventType.Error
               );
             }
-            return res;
+            sub.next(res);
           },
           error: (error) => {
             this.toastService.show(
@@ -59,7 +59,7 @@ export class RegisterDataService {
               error.error,
               ToastEventType.Error
             );
-            return error;
+            sub.error(error);
           },
         });
     });

@@ -4,12 +4,15 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import ValidatorHelper, { ValidatorOption } from '../models/validator-option';
 import { ValidatorResult } from '../models/validator-result';
 import { Validator } from '../validators/validator';
 import { ValidatorService } from '../services/validator.service';
+import { PasswordConfirmValidator } from '../validators/validator-password-confirm';
 
 @Directive({
   selector: '[form-validation]',
@@ -26,6 +29,14 @@ export class ValidationDirective implements OnInit, DoCheck {
     private validatorService: ValidatorService
   ) {
     this.element = this.el.nativeElement;
+  }
+
+
+  @Input('password-confirm')
+  set passwordConfirm(elementConfirmWith: HTMLInputElement) {
+    const validator = new PasswordConfirmValidator();
+    validator.setCompareEl(elementConfirmWith);
+    this.validators.push(validator)
   }
 
   @Input('form-validation')
@@ -47,13 +58,9 @@ export class ValidationDirective implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    if(this.startTyping){
+    if (this.startTyping) {
       this.validate();
     }
-  }
-
-  onChange() {
-    this.validate();
   }
 
   @HostListener('mouseenter') onMouseEnter() {
@@ -78,7 +85,7 @@ export class ValidationDirective implements OnInit, DoCheck {
     this.label = label;
   }
 
-  validate(focusCheck = false) {
+  validate() {
     let result: ValidatorResult | undefined;
 
     // validate all validator for one input
@@ -88,6 +95,7 @@ export class ValidationDirective implements OnInit, DoCheck {
         result = validateReuslt;
       }
     });
+
     if (result != null && !result.isValid) {
       this.label.style.height = '';
       this.label.style.opacity = '';

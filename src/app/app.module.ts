@@ -31,6 +31,7 @@ import { environment } from 'src/environments/environment';
 import { RegisterDataService } from './core/account/services/register-data.service';
 import { RegisterApiService } from './core/account/services/register.service';
 import { ValidationModule } from 'projects/validation/src/validation.module';
+import { SubmitButtonComponent } from './common/components/submit-button/submit-button.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ValidationModule } from 'projects/validation/src/validation.module';
     RegisterOrganizationComponent,
     RegisterPersonalDetailsComponent,
     RegisterOrganizationDetailsComponent,
+    SubmitButtonComponent,
   ],
   imports: [
     BrowserModule,

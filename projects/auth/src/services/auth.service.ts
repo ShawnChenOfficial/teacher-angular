@@ -16,8 +16,9 @@ export class AuthService {
   login(username: string, password: string) {
     return new Observable((loginSub: Subscriber<any>) => {
       this.tokenService.getAccessToken(username, password).subscribe(
-        sub => {
-          loginSub.complete();
+        (sub) => {
+          this.$isLoggedin.next(true);
+          loginSub.next(sub);
         },
         (er: HttpErrorResponse) => {
           if (er.status == 400) {
@@ -31,9 +32,11 @@ export class AuthService {
   }
 
   logOut() {
-    this.$isLoggedin.next(false);
-    this.tokenService.deleteToken();
-    localStorage.clear();
-    this.router.navigate([LOGIN_ROUTE]);
+    return new Observable<any>((sub: Subscriber<any>) => {
+      this.$isLoggedin.next(false);
+      this.tokenService.deleteToken();
+      localStorage.clear();
+      sub.next();
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LOGIN_ROUTE } from 'projects/auth/src/persistence/login-route';
 import { ValidatorService } from 'projects/validation/src/services/validator.service';
 import { RegisterPersonalEdit } from 'src/app/core/account/models/edits/register-personal';
 import { UserGender } from 'src/app/core/account/models/views/user-gender';
@@ -13,18 +14,13 @@ import { RegisterDataService } from 'src/app/core/account/services/register-data
 export class RegisterPersonalDetailsComponent implements OnInit {
   edit: RegisterPersonalEdit;
 
+  test = '020';
+
+  isLoading = false;
+
   genderOptions = Object.keys(UserGender)
     .map((key) => UserGender[key as any])
     .filter((value) => typeof value === 'string') as string[];
-  phonePrefixOptions: Array<any> = new Array<any>(
-    '020',
-    '021',
-    '022',
-    '026',
-    '027',
-    '028',
-    '029'
-  );
 
   constructor(
     private registerDataService: RegisterDataService,
@@ -32,22 +28,29 @@ export class RegisterPersonalDetailsComponent implements OnInit {
     private router: Router
   ) {
     this.edit = this.registerDataService.getPersonalEdit();
+
+    if (!this.edit.hasAccountInfo) {
+      this.router.navigate(['account', 'register']);
+    }
   }
 
   ngOnInit(): void {
     this.edit.gender = UserGender.Female;
-    this.edit.phonePrefix = this.phonePrefixOptions[0];
   }
 
   submit() {
     if (!this.validatorService.isValid) {
       return;
     } else {
+      this.isLoading = true;
       this.registerDataService.registerPersonalAccount().subscribe({
         next: (res) => {
-          this.router.navigate(['account', 'login']);
+          this.isLoading = false;
+          if (res) this.router.navigate([LOGIN_ROUTE]);
         },
-        error: (error) => {},
+        error: (error) => {
+          this.isLoading = false;
+        },
       });
     }
   }
