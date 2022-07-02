@@ -3,10 +3,10 @@ export class RegisterOrganizationEdit {
   password: string;
   re_password: string;
   username: string;
-  organizationName: string;
-  organizationIdentifier: string;
+  organizationName?: string;
+  organizationIdentifier?: string;
 
   get hasOrganizationInfo() {
-    return this.organizationName;
+    return this.organizationName && this.organizationIdentifier;
   }
 }

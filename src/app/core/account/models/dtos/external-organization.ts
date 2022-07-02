@@ -12,7 +12,7 @@ export class ExternalOrganization {
 
   constructor(json: any) {
     this.organizationName = json.Org_Name;
-    this.organizationUniqueIdentifier = json.School_id;
+    this.organizationUniqueIdentifier = json.School_Id;
     this.telephone = json.Telephone;
     this.email = json.Email;
     this.fax = json.Fax;
@@ -23,7 +23,7 @@ export class ExternalOrganization {
     this.postcode = json.Add2_Postal_Code;
   }
 
-  get fullAddress(){
+  get fullAddress() {
     return `${this.address} ${this.suburb} ${this.city} ${this.postcode}`;
   }
 }

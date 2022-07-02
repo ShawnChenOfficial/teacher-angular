@@ -28,7 +28,7 @@ export class SearchResultComponent implements OnInit {
 
   width: number;
 
-  constructor(private thisElement: ElementRef) {}
+  constructor(private thisElement: ElementRef) { }
 
   ngOnInit(): void {
     if (!this.input) throw 'Missing input element';

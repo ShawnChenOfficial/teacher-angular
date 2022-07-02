@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ValidatorService } from 'projects/validation/src/services/validator.service';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { SearchResultComponent } from 'src/app/common/components/search-result/search-result.component';
@@ -20,16 +21,21 @@ export class RegisterOrganizationComponent implements OnInit {
   edit: RegisterOrganizationEdit = new RegisterOrganizationEdit();
   searchResult: Array<SearchResult> = new Array<SearchResult>();
 
+  searchTerm?: string;
+
   searchBehavior: Subject<any> = new Subject<any>();
 
   @ViewChild(SearchResultComponent)
   child: SearchResultComponent;
 
+  @ViewChild('searchInput') inputSearchElement: ElementRef;
+
   constructor(
     private router: Router,
     private organizationService: OrganizationApiService,
     private registerDataService: RegisterDataService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private validatorService: ValidatorService
   ) {
     this.registerDataService.clear();
     this.edit = this.registerDataService.getOrganizationEdit();
@@ -38,7 +44,7 @@ export class RegisterOrganizationComponent implements OnInit {
   ngOnInit(): void {
     this.searchBehavior.pipe(debounceTime(500)).subscribe(() =>
       this.organizationService
-        .externalSearch(this.edit.organizationName)
+        .externalSearch(this.searchTerm ?? '')
         .subscribe({
           next: (sub) => {
             this.searchResult = sub.map(
@@ -59,6 +65,32 @@ export class RegisterOrganizationComponent implements OnInit {
   setOrganization(source: ExternalOrganization) {
     this.edit.organizationIdentifier = source.organizationUniqueIdentifier;
     this.edit.organizationName = source.organizationName;
+    this.searchTerm = source.organizationName;
+  }
+
+  clearOrganization() {
+    this.edit.organizationIdentifier = undefined;
+    this.edit.organizationName = undefined;
+  }
+
+  @HostListener('document:click', ['$event'])
+  focusOut(event: any) {
+    if (!this.inputSearchElement.nativeElement.contains(event.target)) {
+      if (!this.searchTerm && !this.showDetails) this.clearOrganization();
+      else this.searchTerm = this.edit.organizationName;
+    }
+  }
+
+  submit() {
+    if (!this.edit.organizationIdentifier) {
+      this.clearOrganization();
+    }
+    if (!this.validatorService.isValid) {
+      return;
+    }
+    else {
+      this.router.navigate(['account', 'register', 'organization', 'details']);
+    }
   }
 
   get showDetails() {
