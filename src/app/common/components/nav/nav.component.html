@@ -3,11 +3,18 @@
     <img class="ms-3" src="../favicon.ico" />
   </div>
   <ul class="nav justify-content-end">
-    <li class="nav-item">
+    <ng-container *ngIf="!isLoggedIn">
+      <li class="nav-item">
       <a class="nav-link" routerLink="account/register">Register</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="account/login">Login</a>
     </li>
+    </ng-container>
+    <ng-container *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a class="nav-link pointer" (click)="logout()">Logout</a>
+      </li>
+    </ng-container>
   </ul>
 </div>

@@ -4,6 +4,7 @@
     <div class="form-group mb-3">
       <label for="firstName">First name</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"
@@ -15,6 +16,7 @@
     <div class="form-group mb-3">
       <label for="lastname">Lastname</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"
@@ -26,6 +28,7 @@
     <div class="form-group mb-3">
       <label for="title">Title</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"
@@ -37,39 +40,28 @@
     <div class="form-group mb-3">
       <label for="gender">Gender</label>
       <select id="gender" class="form-control mb-3" [(ngModel)]="edit.gender">
-        <option *ngFor="let gender of genderOptions" [value]="genderOptions[0]">{{gender}}</option>
+        <option *ngFor="let gender of genderOptions; let i = index" [value]="i">
+          {{ gender }}
+        </option>
       </select>
     </div>
-
     <div class="form-group mb-3">
       <label for="phone">Phone</label>
-      <div id="phone" class="row w-100">
-        <div class="col-3" fxLayout="row" fxLayoutAlign="space-between">
-          <div class="align-middle pt-1 pe-1">(</div>
-          <select class="form-control" [(ngModel)]="edit.phonePrefix">
-            <option selected [value]="null">Select</option>
-            <option value="021">021</option>
-            <option value="022">022</option>
-            <option value="027">027</option>
-          </select>
-          <div class="align-middle pt-1 ps-1">)</div>
-        </div>
-        <div class="align-middle pt-1 col-1">-</div>
-        <div class="col-8">
-          <input
-            type="text"
-            required
-            class="form-control"
-            id="title"
-            placeholder="Phone number"
-            [(ngModel)]="edit.phone"
-          />
-        </div>
+      <div id="phone" class="row w-100 mx-0">
+        <input
+          form-validation="required"
+          type="text"
+          class="form-control"
+          id="phone"
+          placeholder="Phone number"
+          [(ngModel)]="edit.phone"
+        />
       </div>
     </div>
     <div class="form-group mb-3">
       <label for="city">City</label>
       <input
+        form-validation="required"
         type="text"
         required
         class="form-control"
@@ -83,9 +75,7 @@
       <button type="button" class="btn btn-primary" routerLink="..">
         Back
       </button>
-      <button type="submit" class="btn btn-primary" (click)="submit()">
-        Submit
-      </button>
+      <app-submit-button [status]="isLoading" (submit)="submit()"></app-submit-button>
     </div>
   </form>
 </div>

@@ -4,27 +4,39 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import ValidatorHelper, { ValidatorOption } from '../models/validator-option';
 import { ValidatorResult } from '../models/validator-result';
 import { Validator } from '../validators/validator';
 import { ValidatorService } from '../services/validator.service';
+import { PasswordConfirmValidator } from '../validators/validator-password-confirm';
 
 @Directive({
   selector: '[form-validation]',
   exportAs: 'form-validation',
 })
-export class ValidationDirective implements OnInit {
+export class ValidationDirective implements OnInit, DoCheck {
   element: HTMLInputElement;
   label: HTMLSpanElement;
   validators: Array<Validator>;
+  startTyping = false;
 
   constructor(
     private el: ElementRef,
     private validatorService: ValidatorService
   ) {
     this.element = this.el.nativeElement;
+  }
+
+
+  @Input('password-confirm')
+  set passwordConfirm(elementConfirmWith: HTMLInputElement) {
+    const validator = new PasswordConfirmValidator();
+    validator.setCompareEl(elementConfirmWith);
+    this.validators.push(validator)
   }
 
   @Input('form-validation')
@@ -41,11 +53,14 @@ export class ValidationDirective implements OnInit {
 
   @HostListener('input')
   onInput() {
+    this.startTyping = true;
     this.validate();
   }
 
-  onChange() {
-    this.validate();
+  ngDoCheck(): void {
+    if (this.startTyping) {
+      this.validate();
+    }
   }
 
   @HostListener('mouseenter') onMouseEnter() {

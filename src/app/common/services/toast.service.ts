@@ -11,10 +11,10 @@ export class ToastService {
     this.toastEvents = this._toastEvents.asObservable();
   }
 
-  show(title: string, message: string, type: ToastEventType) {
+  show(title: string, message: string | string[], type: ToastEventType) {
     this._toastEvents.next({
-      message,
-      title,
+      message: message,
+      title: title,
       type: type,
     });
   }

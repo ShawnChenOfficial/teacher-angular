@@ -28,15 +28,14 @@ export class LoginComponent implements OnInit {
     if (!this.validatorService.isValid) {
       return;
     } else {
-      this.authService.login(this.username, this.password).subscribe(
-        (response) => {
-          this.toastService.show('Welcome', '', ToastEventType.Success);
+      this.authService.login(this.username, this.password).subscribe({
+        next: (response) => {
           this.router.navigate(['']);
         },
-        (error) => {
+        error: (error) => {
           this.toastService.show('Login Failed', error, ToastEventType.Error);
-        }
-      );
+        },
+      });
     }
   }
 }
