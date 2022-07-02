@@ -32,6 +32,8 @@ import { RegisterDataService } from './core/account/services/register-data.servi
 import { RegisterApiService } from './core/account/services/register.service';
 import { ValidationModule } from 'projects/validation/src/validation.module';
 import { SubmitButtonComponent } from './common/components/submit-button/submit-button.component';
+import { OrganizationApiService } from './core/account/services/organization.service';
+import { SearchResultComponent } from './common/components/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { SubmitButtonComponent } from './common/components/submit-button/submit-
     RegisterPersonalDetailsComponent,
     RegisterOrganizationDetailsComponent,
     SubmitButtonComponent,
+    SearchResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { SubmitButtonComponent } from './common/components/submit-button/submit-
     CategoryService,
     RegisterDataService,
     RegisterApiService,
+    OrganizationApiService,
     ToastService,
   ],
   bootstrap: [AppComponent],

@@ -1,17 +1,36 @@
-<div fxlayoutalign="center center" class="h-100 sreen-center" [hidden]="showDetails">
-    <form class="organization">
-        <h3 class="mb-3">Tell us more about your organization</h3>
-        <div class="form-group mb-3">
-          <input type="text" required class="form-control" placeholder="Search for your organization">
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <button type="button" class="btn btn-primary" routerLink="..">Back</button>
-          <button type="submit" class="btn btn-primary" routerLink="details">Submit</button>
-        </div>
-      </form>
-  </div>
-  
-  <div class="h-100" [hidden]="!showDetails">
-      <router-outlet></router-outlet>
-  </div>
-  
+<div
+  fxlayoutalign="center center"
+  class="h-100 sreen-center"
+  [hidden]="showDetails"
+>
+  <form class="organization">
+    <h3 class="mb-3">Tell us more about your organization</h3>
+    <div class="form-group mb-3">
+      <input
+        #searchInput
+        type="text"
+        class="form-control"
+        (keydown)="search()"
+        placeholder="Search for your organization"
+        [(ngModel)]="edit.organizationName"
+      />
+      <app-search-result
+        [input-element]="searchInput"
+        [search-result]="searchResult"
+        (setSource)="setOrganization($event)"
+      ></app-search-result>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button type="button" class="btn btn-primary" routerLink="..">
+        Back
+      </button>
+      <button type="submit" class="btn btn-primary" routerLink="details">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="h-100" [hidden]="!showDetails">
+  <router-outlet></router-outlet>
+</div>

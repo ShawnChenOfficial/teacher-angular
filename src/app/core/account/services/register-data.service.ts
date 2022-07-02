@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { ToastEventType } from 'src/app/common/models/toast';
 import { ToastService } from 'src/app/common/services/toast.service';
+import { RegisterOrganizationEdit } from '../models/edits/register-organization';
 import { RegisterPersonalEdit } from '../models/edits/register-personal';
 import { RegisterPersonalPost } from '../models/posts/register-personal';
 import { RegisterApiService } from './register.service';
@@ -9,7 +10,7 @@ import { RegisterApiService } from './register.service';
 @Injectable()
 export class RegisterDataService {
   private _personalEdit: RegisterPersonalEdit | null;
-  private _organizationEdit: null;
+  private _organizationEdit: RegisterOrganizationEdit | null;
 
   constructor(
     private apiService: RegisterApiService,
@@ -24,6 +25,9 @@ export class RegisterDataService {
   }
 
   getOrganizationEdit() {
+    if (this._organizationEdit == null) {
+      this._organizationEdit = new RegisterOrganizationEdit();
+    }
     return this._organizationEdit;
   }
 
