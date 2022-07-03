@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './core/account/components/login/login.component';
 import { RegisterOrganizationDetailsComponent } from './core/account/components/register/register-organization/register-organization-details/register-organization-details.component';
@@ -7,8 +7,6 @@ import { RegisterPersonalDetailsComponent } from './core/account/components/regi
 import { RegisterPersonalComponent } from './core/account/components/register/register-personal/register-personal.component';
 import { RegisterComponent } from './core/account/components/register/register.component';
 import { HomeComponent } from './core/home/home.component';
-import { LatestPostsComponent } from './core/home/latest-posts/latest-posts.component';
-import { SingleCategoryPostComponent } from './core/home/single-category-post/single-category-post.component';
 
 const routes: Routes = [
   {
@@ -61,4 +59,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

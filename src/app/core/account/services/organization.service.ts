@@ -8,7 +8,7 @@ import { Organization } from '../models/dtos/organization';
 
 @Injectable()
 export class OrganizationApiService {
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService) { }
 
   search(query: SearchQuery) {
     return this.http
@@ -19,7 +19,7 @@ export class OrganizationApiService {
   }
 
   externalSearch(term: string) {
-   return this.http
+    return this.http
       .get<Array<any>>(
         `https://catalogue.data.govt.nz/api/3/action/datastore_search`,
         {
@@ -30,6 +30,6 @@ export class OrganizationApiService {
           },
         }
       )
-      .pipe(map((d: any) => (d.result.records as Array<any>).map(c  => new ExternalOrganization(c))));
+      .pipe(map((d: any) => (d.result.records as Array<any>).map(c => new ExternalOrganization(c))));
   }
 }
