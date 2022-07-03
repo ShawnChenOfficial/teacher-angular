@@ -4,6 +4,7 @@ import { ToastEventType } from 'src/app/common/models/toast';
 import { ToastService } from 'src/app/common/services/toast.service';
 import { RegisterOrganizationEdit } from '../models/edits/register-organization';
 import { RegisterPersonalEdit } from '../models/edits/register-personal';
+import { RegisterOrganizationPost } from '../models/posts/register-organization';
 import { RegisterPersonalPost } from '../models/posts/register-personal';
 import { RegisterApiService } from './register.service';
 
@@ -15,7 +16,7 @@ export class RegisterDataService {
   constructor(
     private apiService: RegisterApiService,
     private toastService: ToastService
-  ) {}
+  ) { }
 
   getPersonalEdit() {
     if (this._personalEdit == null) {
@@ -45,7 +46,7 @@ export class RegisterDataService {
             if (res) {
               this.toastService.show(
                 'Register success',
-                'We have sent out a validation email, please check in your email',
+                'We have sent you a validation email, please check in your email',
                 ToastEventType.Success
               );
             } else {
@@ -69,5 +70,36 @@ export class RegisterDataService {
     });
   }
 
-  registerOrganizationAccount() {}
+  registerOrganizationAccount() {
+    return new Observable<any>((sub: Subscriber<any>) => {
+      this.apiService
+        .registerOrganizationAccount(new RegisterOrganizationPost(this._organizationEdit!))
+        .subscribe({
+          next: (res) => {
+            if (res) {
+              this.toastService.show(
+                'Register success',
+                'We have sent you a validation email, please check in your email',
+                ToastEventType.Success
+              );
+            } else {
+              this.toastService.show(
+                'Register failed',
+                'Unexpected error',
+                ToastEventType.Error
+              );
+            }
+            sub.next(res);
+          },
+          error: (error) => {
+            this.toastService.show(
+              'Register failed',
+              error.error,
+              ToastEventType.Error
+            );
+            sub.error(error);
+          },
+        });
+    });
+  }
 }

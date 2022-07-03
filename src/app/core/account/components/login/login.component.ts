@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toastService: ToastService,
     private validatorService: ValidatorService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   tryLogin() {
     if (!this.validatorService.isValid) {

@@ -6,7 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NavComponent } from './common/components/nav/nav.component';
 import { ContentComponent } from './common/components/content/content.component';
-import { SearchComponent } from './core/shared/search/search.component';
+import { PostSearchComponent } from './core/shared/post-search/post-search.component';
 import { HomeComponent } from './core/home/home.component';
 import { LatestPostsComponent } from './core/home/latest-posts/latest-posts.component';
 import { PostCardComponent } from './core/shared/posts-per-category/post-card/post-card.component';
@@ -15,7 +15,6 @@ import { SingleCategoryPostComponent } from './core/home/single-category-post/si
 import { CategoriesComponent } from './core/home/categories/categories.component';
 import { CategoryService } from './core/home/categories/services/category.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RequestInterceptor } from '../../projects/auth/src/interceptors/http.interceptor';
 import { FormsModule } from '@angular/forms';
 import { ToastComponent } from './common/components/toast/toast.component';
 import { ToastListComponent } from './common/components/toast-list/toast-list.component';
@@ -33,14 +32,14 @@ import { RegisterApiService } from './core/account/services/register.service';
 import { ValidationModule } from 'projects/validation/src/validation.module';
 import { SubmitButtonComponent } from './common/components/submit-button/submit-button.component';
 import { OrganizationApiService } from './core/account/services/organization.service';
-import { SearchResultComponent } from './common/components/search-result/search-result.component';
+import { SearchResultComponent } from './common/components/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     ContentComponent,
-    SearchComponent,
+    PostSearchComponent,
     HomeComponent,
     LatestPostsComponent,
     PostsPerCategoryComponent,
@@ -77,4 +76,4 @@ import { SearchResultComponent } from './common/components/search-result/search-
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

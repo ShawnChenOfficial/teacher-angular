@@ -22,7 +22,7 @@ export class AuthService {
         },
         (er: HttpErrorResponse) => {
           if (er.status == 400) {
-            loginSub.error('Invalid email or password');
+            loginSub.error(er.error.error_description);
           } else {
             loginSub.error('Unknown error');
           }

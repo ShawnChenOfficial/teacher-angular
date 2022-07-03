@@ -2,10 +2,9 @@
   <form class="organization">
     <h3 class="mb-3">Tell us more about your organization</h3>
     <div class="form-group mb-3">
-      <input #searchInput form-validation="required" type="text" class="form-control" (keydown)="search()"
-        placeholder="Search for your organization" [(ngModel)]="searchTerm" />
-      <app-search-result [input-element]="searchInput" [search-result]="searchResult"
-        (setSource)="setOrganization($event)"></app-search-result>
+      <app-search [show-sub]="true" (searchFn)="search($event)" (setSource)="setOrganization($event)"
+        (clearSource)="clearOrganization()">
+      </app-search>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
       <button type="button" class="btn btn-primary" routerLink="..">
