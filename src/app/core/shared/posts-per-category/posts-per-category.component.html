@@ -1,6 +1,13 @@
 <div>
   <h5>{{ category.name }}</h5>
-  <div class="row">
-    <app-post-card class="col-3" *ngFor="let item of list" [category]="category"></app-post-card>
+  <div *ngIf="list != null && list.length > 0" class="row">
+    <app-post-card class="col-3" *ngFor="let item of list" [category]="category">
+    </app-post-card>
+  </div>
+
+  <div *ngIf="list == null || list.length == 0" class="alert alert-dark text-center" role="alert">
+    <p class="m-0">There is no post for {{category.name}} yet.<span
+        class="ms-3 pointer badge bg-primary pt-1">Post</span>
+    </p>
   </div>
 </div>

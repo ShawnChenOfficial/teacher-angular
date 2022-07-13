@@ -21,11 +21,11 @@ export class PostsPerCategoryComponent implements OnInit {
 
   list: Array<number> | null = null;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  loadData(){
+  loadData() {
     this.category.isLoading = true;
     this.list = new Array<number>();
     for (let i = 0; i < 6; i++) {
