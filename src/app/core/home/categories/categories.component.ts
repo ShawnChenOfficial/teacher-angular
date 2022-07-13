@@ -1,5 +1,7 @@
 import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ToastEventType } from 'src/app/common/models/toast';
+import { ToastService } from 'src/app/common/services/toast.service';
 import { CategoryView } from './models/views/category';
 import { CategoryService } from './services/category.service';
 
@@ -12,16 +14,21 @@ export class CategoriesComponent implements OnInit {
   @Output()
   selectCategoryEvent: EventEmitter<any> = new EventEmitter<any>();
 
-  categories: Array<CategoryView>;
+  categories: Array<CategoryView> = [];
 
+  isLoading = false;
   isAll = false;
 
   constructor(private categoryService: CategoryService) {
-    this.categories = categoryService.getCategories();
-    this.isAll = this.categories.filter((f) => f.active).length == 0;
+    this.isLoading = true;
+    this.categoryService.getCategories().subscribe(res => {
+      this.categories = res;
+      this.isAll = this.categories.filter((f) => f.active).length == 0;
+      this.isLoading = false;
+    })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   setCategoryStatus(category: CategoryView | null) {
     this.categories.forEach((f) => (f.active = false));

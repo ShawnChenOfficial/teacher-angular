@@ -21,6 +21,12 @@ export class SearchResultComponent implements AfterViewInit {
   searchTerm: string;
   searchResult: Array<SearchResult> = new Array<SearchResult>();
 
+  @Input('placeholder')
+  placeholder: string;
+
+  @Input('required')
+  isRequired: boolean;
+
   @ViewChild('searchInput')
   el: ElementRef;
 
@@ -43,6 +49,10 @@ export class SearchResultComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.onResize();
+  }
+
+  get validationOptions() {
+    return this.isRequired ? 'required' : null;
   }
 
   // start search, call the search func which defind in parent component

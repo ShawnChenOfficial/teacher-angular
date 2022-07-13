@@ -1,41 +1,47 @@
 import { Injectable } from '@angular/core';
-import { observable, Observable } from 'rxjs';
+import { HttpService } from 'projects/auth/src/services/http.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ToastEventType } from 'src/app/common/models/toast';
+import { ToastService } from 'src/app/common/services/toast.service';
+import { environment } from 'src/environments/environment';
+import { Category } from '../models/get/category';
 import { CategoryView } from '../models/views/category';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
-  private categories: Array<CategoryView> = new Array<CategoryView>();
+  private categories: Array<CategoryView>;
 
-  constructor() {
-    this.loadCategories();
+  constructor(private http: HttpService, private toastService: ToastService) {
   }
 
   getCategories() {
-    return this.categories;
+    return new Observable<CategoryView[]>(sub => {
+      if (this.categories == undefined) {
+        this.loadCategories().subscribe({
+          next: res => {
+            if (res.length > 0) {
+              this.categories = res.map(m => new CategoryView(m));
+            }
+            else {
+              this.categories = [];
+            }
+            sub.next(this.categories);
+          }, error: err => {
+            this.toastService.show('Failed to load categories', err, ToastEventType.Error);
+            sub.next([]);
+          }
+        });
+      }
+      else {
+        sub.next(this.categories);
+      }
+    })
   }
 
   loadCategories() {
-    this.categories = new Array<CategoryView>();
-    this.categories.push(new CategoryView('Languages', false));
-    this.categories.push(new CategoryView('IT', false));
-    this.categories.push(new CategoryView('Instrument', false));
-    this.categories.push(new CategoryView('Chemistry', false));
-    this.categories.push(new CategoryView('Physics', false));
-    this.categories.push(new CategoryView('Fitness', false));
-    this.categories.push(new CategoryView('Early Childhood', false));
-  }
-
-  startLoadingData() {
-    const categories = this.categories;
-    return new Observable((observable) => {
-      const wait = setInterval(function () {
-        if (categories.filter((f) => f.isLoading).length == 0) {
-          clearInterval(wait);
-          observable.next(categories);
-        }
-      }, 1000);
-    });
+    return this.http.get<Array<any>>(environment.baseEndPoint + '/api/category').pipe(map(m => m.map(r => new Category(r))));
   }
 }

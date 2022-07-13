@@ -1,20 +1,15 @@
-<ul class="nav justify-content-center category-list pb-3">
+<ul [ngClass]="{'d-none': isLoading}" class="nav justify-content-center category-list pb-3">
   <li class="nav-item">
-    <a
-      role="button"
-      class="nav-link"
-      [ngClass]="{ active: isAll }"
-      (click)="setCategoryStatus(null)"
-      >All</a
-    >
+    <a role="button" class="nav-link" [ngClass]="{ active: isAll }" (click)="setCategoryStatus(null)">All</a>
   </li>
   <li class="nav-item" *ngFor="let item of categories">
-    <a
-      role="button"
-      class="nav-link"
-      [ngClass]="{ active: item.active }"
-      (click)="setCategoryStatus(item)"
-      >{{ item.name }}</a
-    >
+    <a role="button" class="nav-link" [ngClass]="{ active: item.active }" (click)="setCategoryStatus(item)">{{ item.name
+      }}</a>
   </li>
 </ul>
+
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+</div>

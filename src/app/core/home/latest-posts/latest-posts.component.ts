@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { CategoryView } from '../categories/models/views/category';
 import { CategoryService } from '../categories/services/category.service';
 
@@ -9,17 +8,18 @@ import { CategoryService } from '../categories/services/category.service';
   styleUrls: ['./latest-posts.component.scss'],
 })
 export class LatestPostsComponent implements OnInit {
- 
-  categories: Array<CategoryView>;
+
+  categories: Array<CategoryView> = [];
   isLoading = false;
 
   constructor(private categoryService: CategoryService) {
-    this.categories = categoryService.getCategories();
     this.isLoading = true;
-    categoryService.startLoadingData().subscribe(s => {
+    this.categoryService.getCategories().subscribe(res => {
+      this.categories = res;
       this.isLoading = false;
-    });
+    })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

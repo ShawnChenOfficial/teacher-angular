@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchEvent } from 'src/app/common/models/search-result';
 
 @Component({
   selector: 'app-post-search',
@@ -11,5 +12,11 @@ export class PostSearchComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  search($event: SearchEvent) {
+    $event.func([]);
+  }
 
+  setSearchOption($event: SearchEvent) {
+    $event.func('')
+  }
 }

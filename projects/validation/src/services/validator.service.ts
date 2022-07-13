@@ -5,15 +5,18 @@ import { ValidationDirective } from '../directives/validation.directive';
 export class ValidatorService {
   validators: Array<ValidationDirective> = [];
 
-  constructor() {}
+  constructor() { }
 
   get isValid() {
     let result = true;
-    this.validators.forEach((f) => {
-      if (!f.validate()) {
-        result = false;
-      }
-    });
+
+    if (this.validators.length > 0) {
+      this.validators.forEach((f) => {
+        if (!f.validate()) {
+          result = false;
+        }
+      });
+    }
 
     return result;
   }

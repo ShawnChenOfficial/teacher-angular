@@ -17,7 +17,7 @@ import { AuthToken } from '../models/auth.token';
 export class TokenService {
   private token: Subject<AuthToken> | null = null;
 
-  constructor(private http: HttpClient, @Inject('environment') private environment : any) {}
+  constructor(private http: HttpClient, @Inject('environment') private environment: any) { }
 
   getAccessToken(username: string, password: string) {
     let params = new HttpParams();
@@ -32,7 +32,7 @@ export class TokenService {
         .subscribe((token) => {
           this.saveToken(token);
           sub.next();
-        }, error =>{
+        }, error => {
           sub.error(error);
         });
     });

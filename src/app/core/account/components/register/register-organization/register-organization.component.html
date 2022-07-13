@@ -3,7 +3,7 @@
     <h3 class="mb-3">Tell us more about your organization</h3>
     <div class="form-group mb-3">
       <app-search [show-sub]="true" (searchFn)="search($event)" (setSource)="setOrganization($event)"
-        (clearSource)="clearOrganization()">
+        (clearSource)="clearOrganization()" [placeholder]="'Search for your organization'" [required]="true">
       </app-search>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between">
