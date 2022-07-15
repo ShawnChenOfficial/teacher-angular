@@ -1,4 +1,4 @@
-import { ExternalOrganization } from "../dtos/external-organization";
+import { ExternalOrganization } from "../get/external-organization";
 
 export class RegisterOrganizationEdit {
   email: string;

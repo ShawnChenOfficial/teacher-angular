@@ -3,8 +3,8 @@ import { HttpService } from 'projects/auth/src/services/http.service';
 import { map } from 'rxjs/operators';
 import { SearchQuery } from 'src/app/common/models/search-query';
 import { environment } from 'src/environments/environment';
-import { ExternalOrganization } from '../models/dtos/external-organization';
-import { Organization } from '../models/dtos/organization';
+import { ExternalOrganization } from '../models/get/external-organization';
+import { Organization } from '../models/get/organization';
 
 @Injectable()
 export class OrganizationApiService {

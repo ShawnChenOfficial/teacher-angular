@@ -63,14 +63,6 @@ export class ValidationDirective implements OnInit, DoCheck {
     }
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
-    this.el.nativeElement.style.backgroundColor = '#fffe51';
-  }
-
-  @HostListener('mouseleave') onMouseLeave() {
-    this.el.nativeElement.style.backgroundColor = '';
-  }
-
   ngOnInit() {
     this.initErrorLabel();
   }
@@ -101,10 +93,12 @@ export class ValidationDirective implements OnInit, DoCheck {
       this.label.style.height = '';
       this.label.style.opacity = '';
       this.label.innerHTML = result.message ?? '';
+      this.el.nativeElement.style.backgroundColor = '#fffe51';
       return false;
     } else {
       this.label.style.height = '0px';
       this.label.style.opacity = '0';
+      this.el.nativeElement.style.backgroundColor = '';
       return true;
     }
   }
