@@ -1,0 +1,7 @@
+<div class="border-top p-3" fxLayout="row" fxLayoutAlign="space-between">
+    <div>
+        <button *ngIf="toClose" class="btn btn-sm btn-secondary" (click)="close()">Close</button>
+        <button *ngIf="toRemove" class="btn btn-sm btn-danger" (click)="remove()">Remove</button>
+    </div>
+    <button *ngIf="toSave" class="btn btn-sm btn-primary" (click)="save()">Save</button>
+</div>

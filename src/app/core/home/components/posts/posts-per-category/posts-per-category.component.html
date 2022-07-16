@@ -1,0 +1,23 @@
+<div class="mb-2" fxLayout="row" fxLayoutAlign="start center">
+  <h5 class="mb-0">{{ category.name }}</h5>
+  <p *ngIf="this.items != null && this.items.length > 0 && canPost" class="mb-0 ps-2 pb-1"><span
+      class="pointer badge bg-primary" (click)="create()">Post</span></p>
+</div>
+
+<div *ngIf="!isLoading">
+  <div *ngIf="items != null && items.length > 0" class="row">
+    <app-post-card class="col-3" *ngFor="let item of items" [post]="item">
+    </app-post-card>
+  </div>
+  <div *ngIf="(items == null || items.length == 0) && canPost" class="alert alert-dark text-center" role="alert">
+    <p class="m-0">There is no post for {{category.name}} yet.<span class="ms-3 pointer badge bg-primary pb-1"
+        (click)="create()">Post</span>
+    </p>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+</div>

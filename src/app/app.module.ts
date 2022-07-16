@@ -6,15 +6,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NavComponent } from './common/components/nav/nav.component';
 import { ContentComponent } from './common/components/content/content.component';
-import { PostSearchComponent } from './core/shared/post-search/post-search.component';
-import { HomeComponent } from './core/home/home.component';
-import { LatestPostsComponent } from './core/home/latest-posts/latest-posts.component';
-import { PostCardComponent } from './core/shared/posts-per-category/post-card/post-card.component';
-import { PostsPerCategoryComponent } from './core/shared/posts-per-category/posts-per-category.component';
-import { SingleCategoryPostComponent } from './core/home/single-category-post/single-category-post.component';
-import { CategoriesComponent } from './core/home/categories/categories.component';
-import { CategoryService } from './core/home/categories/services/category.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { PostSearchComponent } from './core/shared/components/post-search/post-search.component';
+import { HomeComponent } from './core/home/components/home.component';
+import { LatestPostsComponent } from './core/home/components/posts/latest-posts/latest-posts.component';
+import { PostCardComponent } from './core/home/components/posts/posts-per-category/post-card/post-card.component';
+import { PostsPerCategoryComponent } from './core/home/components/posts/posts-per-category/posts-per-category.component';
+import { SingleCategoryPostsComponent } from './core/home/components/posts/single-category-posts/single-category-posts.component';
+import { CategoryService } from './core/home/services/category.service';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ToastComponent } from './common/components/toast/toast.component';
 import { ToastListComponent } from './common/components/toast-list/toast-list.component';
@@ -33,6 +32,13 @@ import { ValidationModule } from 'projects/validation/src/validation.module';
 import { SubmitButtonComponent } from './common/components/submit-button/submit-button.component';
 import { OrganizationApiService } from './core/account/services/organization.service';
 import { SearchResultComponent } from './common/components/search/search.component';
+import { PostService } from './core/shared/services/post.sevice';
+import { PostModalComponent } from './core/home/components/posts/post-modal/post-modal.component';
+import { ModalDirective } from './common/directives/modal.directive';
+import { ModalComponent } from './common/components/modal/modal.component';
+import { ModalService } from './common/services/modal.service';
+import { ModalHeaderComponent } from './common/components/modal/modal-header/modal-header.component';
+import { ModalFooterComponent } from './common/components/modal/modal-footer/modal-footer.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +50,7 @@ import { SearchResultComponent } from './common/components/search/search.compone
     LatestPostsComponent,
     PostsPerCategoryComponent,
     PostCardComponent,
-    SingleCategoryPostComponent,
-    CategoriesComponent,
+    SingleCategoryPostsComponent,
     LoginComponent,
     RegisterComponent,
     ToastComponent,
@@ -56,6 +61,11 @@ import { SearchResultComponent } from './common/components/search/search.compone
     RegisterOrganizationDetailsComponent,
     SubmitButtonComponent,
     SearchResultComponent,
+    PostModalComponent,
+    ModalComponent,
+    ModalDirective,
+    ModalHeaderComponent,
+    ModalFooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,10 +79,12 @@ import { SearchResultComponent } from './common/components/search/search.compone
   ],
   providers: [
     CategoryService,
+    PostService,
     RegisterDataService,
     RegisterApiService,
     OrganizationApiService,
     ToastService,
+    ModalService
   ],
   bootstrap: [AppComponent],
 })

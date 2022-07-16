@@ -32,6 +32,6 @@ export class HttpService extends HttpClient {
   }
 
   private addInterceptor(interceptor: HttpInterceptor) {
-    const handler = new HttpInterceptorHandler(this.httpHandler, interceptor);
+    return new HttpService(new HttpInterceptorHandler(this.httpHandler, interceptor));
   }
 }

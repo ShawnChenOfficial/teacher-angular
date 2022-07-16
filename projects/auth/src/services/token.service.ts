@@ -17,7 +17,7 @@ import { AuthToken } from '../models/auth.token';
 export class TokenService {
   private token: Subject<AuthToken> | null = null;
 
-  constructor(private http: HttpClient, @Inject('environment') private environment : any) {}
+  constructor(private http: HttpClient, @Inject('environment') private environment: any) { }
 
   getAccessToken(username: string, password: string) {
     let params = new HttpParams();
@@ -32,7 +32,7 @@ export class TokenService {
         .subscribe((token) => {
           this.saveToken(token);
           sub.next();
-        }, error =>{
+        }, error => {
           sub.error(error);
         });
     });
@@ -60,6 +60,13 @@ export class TokenService {
     });
   }
 
+  getRoles() {
+    if (!this.hasToken()) {
+      return '';
+    }
+    return localStorage.getItem(TOKEN_ROLES);
+  }
+
   deleteToken() {
     localStorage.removeItem(TOKEN_ACCESS);
     localStorage.removeItem(TOKEN_REFRESH);
@@ -75,6 +82,7 @@ export class TokenService {
     return (
       localStorage.getItem(TOKEN_ACCESS) != null &&
       localStorage.getItem(TOKEN_REFRESH) != null &&
+      localStorage.getItem(TOKEN_ROLES) != null &&
       localStorage.getItem(TOKEN_USERID) != null &&
       localStorage.getItem(TOKEN_EXPIRES) != null &&
       localStorage.getItem(TOKEN_NAME) != null

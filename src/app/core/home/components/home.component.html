@@ -1,0 +1,26 @@
+<div>
+    <app-post-search></app-post-search>
+    <div class="content-width m-auto pb-5" [ngClass]="{'d-none': isLoading}">
+        <ul class="nav justify-content-center category-list pb-3">
+            <li class="nav-item">
+                <a role="button" class="nav-link" [ngClass]="{ active: displayAllCategory }"
+                    (click)="setCategoryStatus(null)">All</a>
+            </li>
+            <li class="nav-item" *ngFor="let item of categories">
+                <a role="button" class="nav-link" [ngClass]="{ active: item.active }"
+                    (click)="setCategoryStatus(item)">{{
+                    item.name
+                    }}</a>
+            </li>
+        </ul>
+        <app-latest-posts *ngIf="!selectedCategory && categories != null"></app-latest-posts>
+        <app-single-category-posts *ngIf="selectedCategory && categories != null" [category]="selectedCategory">
+        </app-single-category-posts>
+    </div>
+
+    <div *ngIf="isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+</div>

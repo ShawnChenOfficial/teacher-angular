@@ -1,14 +1,14 @@
-<input #searchInput form-validation="required" type="text" class="form-control" (keydown)="search()"
-  placeholder="Search for your organization" (change)="checkSearchTerm()" [(ngModel)]="searchTerm" />
-<div class="list-group" [style.width.px]="width" *ngIf="searchResult != null && focus">
-  <div *ngIf="searchResult.length == 0" class="list-group-item list-group-item-action pointer">
+<input #searchInput [form-validation]="validationOptions" type="text" class="form-control" (keydown)="search()"
+  [placeholder]="placeholder" (change)="checkSearchTerm()" [(ngModel)]="searchTerm" />
+<div class="list-group" [style.width.px]="width" *ngIf="searchResultView != null && focus">
+  <div *ngIf="searchResultView.length == 0" class="list-group-item list-group-item-action pointer">
     <small class="text-muted">No result</small>
   </div>
-  <div class="list-group-item list-group-item-action pointer" *ngFor="let result of searchResult"
-    (click)="selectResult(result)">
+  <div class="list-group-item list-group-item-action pointer" *ngFor="let resultView of searchResultView"
+    (click)="selectResult(resultView)">
     <div class="d-flex w-100">
-      <p class="mb-0">{{result.title}}</p>
+      <p class="mb-0">{{resultView.title}}</p>
     </div>
-    <small *ngIf="showSub" class="text-muted">{{result.sub}}</small>
+    <small *ngIf="showSub" class="text-muted">{{resultView.sub}}</small>
   </div>
 </div>

@@ -1,0 +1,26 @@
+.modal-base {
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-sm {
+    min-width: 540px;
+    max-width: 540px;
+}
+
+.modal-md {
+    min-width: 720px;
+    max-width: 720px;
+}
+
+.modal-lg {
+    min-width: 960px;
+    max-width: 960px;
+}
+
+.modal-xl {
+    min-width: 1150px;
+    max-width: 1150px;
+}

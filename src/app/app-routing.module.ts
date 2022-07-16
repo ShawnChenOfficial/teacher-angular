@@ -6,7 +6,7 @@ import { RegisterOrganizationComponent } from './core/account/components/registe
 import { RegisterPersonalDetailsComponent } from './core/account/components/register/register-personal/register-personal-details/register-personal-details.component';
 import { RegisterPersonalComponent } from './core/account/components/register/register-personal/register-personal.component';
 import { RegisterComponent } from './core/account/components/register/register.component';
-import { HomeComponent } from './core/home/home.component';
+import { HomeComponent } from './core/home/components/home.component';
 
 const routes: Routes = [
   {

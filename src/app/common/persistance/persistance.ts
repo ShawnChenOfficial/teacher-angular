@@ -1,0 +1,1 @@
+export const INJECT_DATA = 'inject_data';
