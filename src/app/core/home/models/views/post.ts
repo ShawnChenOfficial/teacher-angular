@@ -8,8 +8,6 @@ export class PostView {
     title: string;
     description: string;
     startDate: Date;
-    userId: string;
-    createdBy: Date;
     location: Location;
 
     constructor(post: Post) {
@@ -19,8 +17,6 @@ export class PostView {
         this.categoryName = post.categoryName;
         this.description = post.description;
         this.startDate = post.startDate;
-        this.userId = post.userId;
-        this.createdBy = post.createdBy;
         this.location = post.location;
     }
 }

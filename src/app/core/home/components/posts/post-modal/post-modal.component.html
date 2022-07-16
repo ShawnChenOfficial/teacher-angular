@@ -8,8 +8,11 @@
         </div>
         <div class="form-group mb-3">
             <label for="category">Category</label>
-            <input form-validation="required" type="text" class="form-control" id="category" placeholder="Cateogry"
-                [(ngModel)]="form.categoryId">
+            <select form-validation="required" id="category" class="form-control" [(ngModel)]="form.categoryId">
+                <option *ngFor="let category of categoryOptions;" [value]="category.id">
+                    {{ category.name }}
+                </option>
+            </select>
         </div>
         <div class="form-group mb-3">
             <label for="description">Description</label>

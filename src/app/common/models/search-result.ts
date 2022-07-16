@@ -1,4 +1,7 @@
-export class SearchResult {
+/**
+ * object that used for display search result
+ */
+export class SearchResultView {
     source: any;
 
     title: string;
@@ -11,8 +14,11 @@ export class SearchResult {
     }
 }
 
-export abstract class SearchResultable {
-    abstract toSearchResult(): SearchResult;
+/**
+ * object that used to define how to convert object/raw result to SearchResultView
+ */
+export abstract class SearchResultObject {
+    abstract toSearchResult(): SearchResultView;
 }
 
 export class SearchEvent {

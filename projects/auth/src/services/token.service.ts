@@ -60,6 +60,13 @@ export class TokenService {
     });
   }
 
+  getRoles() {
+    if (!this.hasToken()) {
+      return '';
+    }
+    return localStorage.getItem(TOKEN_ROLES);
+  }
+
   deleteToken() {
     localStorage.removeItem(TOKEN_ACCESS);
     localStorage.removeItem(TOKEN_REFRESH);
@@ -75,6 +82,7 @@ export class TokenService {
     return (
       localStorage.getItem(TOKEN_ACCESS) != null &&
       localStorage.getItem(TOKEN_REFRESH) != null &&
+      localStorage.getItem(TOKEN_ROLES) != null &&
       localStorage.getItem(TOKEN_USERID) != null &&
       localStorage.getItem(TOKEN_EXPIRES) != null &&
       localStorage.getItem(TOKEN_NAME) != null

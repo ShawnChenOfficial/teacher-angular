@@ -19,4 +19,12 @@ export class PostCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get location() {
+    if (!this.post.location) {
+      return 'Undefined';
+    }
+    else {
+      return '';
+    }
+  }
 }

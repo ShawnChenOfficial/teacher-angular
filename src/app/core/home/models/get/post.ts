@@ -7,8 +7,6 @@ export class Post {
     categoryName: string;
     description: string;
     startDate: Date;
-    userId: string;
-    createdBy: Date;
     location: Location;
 
     constructor(json: any) {
@@ -18,8 +16,6 @@ export class Post {
         this.categoryName = json.categoryName;
         this.description = json.description;
         this.startDate = json.startDate;
-        this.userId = json.userId;
-        this.createdBy = json.createdBy;
         this.location = json.location ? Location.new(json.location) : new Location();
     }
 }

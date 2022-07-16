@@ -12,6 +12,7 @@ export class PostSearchComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   search($event: SearchEvent) {
     $event.func([]);
   }

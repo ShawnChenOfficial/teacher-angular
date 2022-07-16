@@ -4,6 +4,7 @@ export class Location {
   suburb?: string;
   city?: string;
   region?: string;
+  postCode?: number;
 
   constructor() {
   }
@@ -16,6 +17,7 @@ export class Location {
     location.suburb = json.suburb;
     location.city = json.city;
     location.region = json.region;
+    location.postCode = json.postCode;
 
     return location;
   }

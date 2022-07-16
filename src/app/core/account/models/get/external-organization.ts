@@ -1,6 +1,6 @@
-import { SearchResult, SearchResultable } from "src/app/common/models/search-result";
+import { SearchResultView, SearchResultObject } from "src/app/common/models/search-result";
 
-export class ExternalOrganization extends SearchResultable {
+export class ExternalOrganization extends SearchResultObject {
 
   organizationName: string;
   organizationUniqueIdentifier: string;
@@ -33,7 +33,7 @@ export class ExternalOrganization extends SearchResultable {
     return `${this.address} ${this.suburb} ${this.city} ${this.postcode}`;
   }
 
-  toSearchResult(): SearchResult {
-    return new SearchResult(this.organizationName, this.fullAddress, this)
+  toSearchResult(): SearchResultView {
+    return new SearchResultView(this.organizationName, this.fullAddress, this)
   }
 }

@@ -6,6 +6,7 @@ import { PostView } from '../../../models/views/post';
 import { PostService } from '../../../../shared/services/post.sevice';
 import { ModalService } from 'src/app/common/services/modal.service';
 import { PostModalComponent } from '../post-modal/post-modal.component';
+import { AuthService } from 'projects/auth/src/services/auth.service';
 
 @Component({
   selector: 'app-posts-per-category',
@@ -29,7 +30,7 @@ export class PostsPerCategoryComponent implements OnInit {
 
   items: Array<PostView> | null = null;
 
-  constructor(private postService: PostService, private toastService: ToastService, private modalService: ModalService) { }
+  constructor(private postService: PostService, private toastService: ToastService, private modalService: ModalService, private authService: AuthService) { }
 
   ngOnInit(): void { }
 
@@ -53,5 +54,9 @@ export class PostsPerCategoryComponent implements OnInit {
         this.loadData();
       }
     });
+  }
+
+  get canPost() {
+    return this.authService.hasPermission('normal');
   }
 }
