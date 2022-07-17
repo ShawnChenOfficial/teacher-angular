@@ -1,0 +1,19 @@
+<div class="h-100">
+    <div class="h-100 border-end pe-0" fxFlex="300px">
+        <div *ngIf="user" class="w-100 mt-3" fxLayout="column" fxLayoutAlign="center center">
+            <div class="rounded-circle profile-img-bg"
+                [ngStyle]="{'background-image': 'url(' + userProfileImgUrl + ')'}">
+            </div>
+            <h4>{{user.firstName}} {{user.lastName}}</h4>
+            <span *ngIf="user.organizationName">{{user.organizationName}}</span>
+            <span>{{user.email}}</span>
+            <span *ngIf="user.phone">{{user.phone}}</span>
+            <button class="mt-2 btn btn-sm btn-primary">Edit Profile</button>
+        </div>
+        <div class="m-3 border-bottom"></div>
+        <app-profile-sidebar></app-profile-sidebar>
+    </div>
+    <div class="h-100 w-100 overflow-scroll">
+        <router-outlet></router-outlet>
+    </div>
+</div>

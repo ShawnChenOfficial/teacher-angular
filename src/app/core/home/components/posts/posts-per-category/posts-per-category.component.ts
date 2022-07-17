@@ -5,7 +5,7 @@ import { CategoryView } from '../../../models/views/category';
 import { PostView } from '../../../models/views/post';
 import { PostService } from '../../../../shared/services/post.sevice';
 import { ModalService } from 'src/app/common/services/modal.service';
-import { PostModalComponent } from '../post-modal/post-modal.component';
+import { PostModalComponent } from '../../../../shared/components/post-modal/post-modal.component';
 import { AuthService } from 'projects/auth/src/services/auth.service';
 
 @Component({
@@ -49,7 +49,7 @@ export class PostsPerCategoryComponent implements OnInit {
   }
 
   create() {
-    this.modalService.open(PostModalComponent).subscribe(s => {
+    this.modalService.open(PostModalComponent, this.category).subscribe(s => {
       if (s != null) {
         this.loadData();
       }

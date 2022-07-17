@@ -1,0 +1,16 @@
+.sidebar-item:hover {
+    background-color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    animation: onMouseOver 0.2s forwards;
+}
+
+@keyframes onMouseOver {
+    from {
+        font-size: medium;
+    }
+
+    to {
+        font-size: large;
+    }
+}

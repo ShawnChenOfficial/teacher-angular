@@ -1,5 +1,5 @@
 <div fxlayoutalign="center center" class="h-100 sreen-center">
-  <form class="details">
+  <div class="details">
     <h3 class="mb-3">Tell us more about yourself</h3>
     <div class="form-group mb-3">
       <label for="firstName">First name</label>
@@ -19,7 +19,7 @@
     <div class="form-group mb-3">
       <label for="gender">Gender</label>
       <select id="gender" class="form-control mb-3" [(ngModel)]="edit.gender">
-        <option *ngFor="let gender of genderOptions; let i = index" [value]="i">
+        <option *ngFor="let gender of genderOptions" [value]="gender">
           {{ gender }}
         </option>
       </select>
@@ -38,10 +38,10 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="space-between">
-      <button type="button" class="btn btn-primary" routerLink="..">
+      <button type="button" class="btn btn-sm btn-primary" routerLink="..">
         Back
       </button>
       <app-submit-button [status]="isLoading" (submit)="submit()"></app-submit-button>
     </div>
-  </form>
+  </div>
 </div>

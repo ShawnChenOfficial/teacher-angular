@@ -9,9 +9,9 @@
     <app-post-card class="col-3" *ngFor="let item of items" [post]="item">
     </app-post-card>
   </div>
-  <div *ngIf="(items == null || items.length == 0) && canPost" class="alert alert-dark text-center" role="alert">
-    <p class="m-0">There is no post for {{category.name}} yet.<span class="ms-3 pointer badge bg-primary pb-1"
-        (click)="create()">Post</span>
+  <div *ngIf="items == null || items.length == 0" class="alert alert-dark text-center" role="alert">
+    <p class="m-0">There is no post for {{category.name}} yet.<span *ngIf="canPost"
+        class="ms-3 pointer badge bg-primary pb-1" (click)="create()">Post</span>
     </p>
   </div>
 </div>

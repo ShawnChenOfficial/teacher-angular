@@ -1,0 +1,8 @@
+<div class="m-4">
+    <h4>My Posts</h4>
+    <p>100 posts, 20 expires</p>
+    <select *ngIf="categoryOptions" [(ngModel)]="selectedCategoryId">
+        <option *ngFor="let category of categoryOptions" [value]="category.source.id">{{category.title}}</option>
+    </select>
+    <app-user-post [categoryId]="selectedCategoryId"></app-user-post>
+</div>

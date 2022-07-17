@@ -17,7 +17,7 @@ export class RequestInterceptor implements HttpInterceptor {
     private tokenService: TokenService,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   intercept(
     req: HttpRequest<any> | any,
@@ -36,13 +36,13 @@ export class RequestInterceptor implements HttpInterceptor {
         sub.complete();
       };
 
-      if(req.auth || req.withCredentials){
-        if(!this.tokenService.hasToken()){
+      if (req.auth || req.withCredentials) {
+        if (!this.tokenService.hasToken()) {
           this.router.navigate([LOGIN_ROUTE]);
           return;
         }
-        else{
-          this.tokenService.getToken().subscribe(sub =>{
+        else {
+          this.tokenService.getToken().subscribe(sub => {
             req = req.clone({
               setHeaders: {
                 Authorization: 'Bearer ' + sub.accessToken
@@ -51,19 +51,19 @@ export class RequestInterceptor implements HttpInterceptor {
             // Pass the request along
             handler.handle(req).subscribe(successHandler, errorHandler, completeHandler);
           },
-          error => {
-            if(error.status == 400){
-              this.authService.logOut();
-            }
-            else{
-              errorHandler(error);
-            }
-          });
+            error => {
+              if (error.status == 400) {
+                this.authService.logOut();
+              }
+              else {
+                errorHandler(error);
+              }
+            });
         }
       }
-      else{
+      else {
         req = req.clone({
-          setHeaders:{}
+          setHeaders: {}
         });
         handler.handle(req).subscribe(successHandler, errorHandler, completeHandler);
       }

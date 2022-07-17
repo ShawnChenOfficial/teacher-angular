@@ -7,6 +7,8 @@ import { RegisterPersonalDetailsComponent } from './core/account/components/regi
 import { RegisterPersonalComponent } from './core/account/components/register/register-personal/register-personal.component';
 import { RegisterComponent } from './core/account/components/register/register.component';
 import { HomeComponent } from './core/home/components/home.component';
+import { ProfileComponent } from './core/profile/components/profile.component';
+import { UserPostsComponent } from './core/profile/components/user-posts/user-posts.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,16 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    children: [
+      {
+        path: 'posts',
+        component: UserPostsComponent
+      }
+    ]
   },
   {
     path: 'account',

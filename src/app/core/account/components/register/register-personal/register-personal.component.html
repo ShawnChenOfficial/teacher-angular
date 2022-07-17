@@ -1,30 +1,33 @@
 <div fxlayoutalign="center center" class="h-100 sreen-center" [hidden]="showDetails">
-    <form class="personal">
-        <h3 class="mb-3">Create a personal account</h3>
-        <div class="form-group mb-3">
-          <label for="email">Email address</label>
-          <input form-validation="required email" type="email" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="edit.email">
-        </div>
-        <div class="form-group mb-3">
-          <label for="password">Password</label>
-          <input #password form-validation="required password" [password-confirm]="repassword" type="password" required class="form-control" id="password" placeholder="Password" [(ngModel)]="edit.password">
-        </div>
-        <div class="form-group mb-3">
-          <label for="re-password">Password</label>
-          <input #repassword form-validation="required password" [password-confirm]="password" type="password" required class="form-control" id="re-password" placeholder="Your password again" [(ngModel)]="edit.re_password">
-        </div>
-        <div class="form-group mb-3">
-          <label for="username">Username</label>
-          <input type="text" form-validation="required" class="form-control" id="username" placeholder="Username" [(ngModel)]="edit.username">
-        </div>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-          <button type="button" class="btn btn-primary" routerLink="..">Back</button>
-          <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
-        </div>
-      </form>
-  </div>
-  
-  <div class="h-100" [hidden]="!showDetails">
-      <router-outlet></router-outlet>
-  </div>
-  
+  <form class="personal">
+    <h3 class="mb-3">Create a personal account</h3>
+    <div class="form-group mb-3">
+      <label for="email">Email address</label>
+      <input form-validation="required email" type="email" class="form-control" id="email" placeholder="Enter email"
+        [(ngModel)]="edit.email">
+    </div>
+    <div class="form-group mb-3">
+      <label for="password">Password</label>
+      <input #password form-validation="required password" [password-confirm]="repassword" type="password" required
+        class="form-control" id="password" placeholder="Password" [(ngModel)]="edit.password">
+    </div>
+    <div class="form-group mb-3">
+      <label for="re-password">Password</label>
+      <input #repassword form-validation="required password" [password-confirm]="password" type="password" required
+        class="form-control" id="re-password" placeholder="Your password again" [(ngModel)]="edit.re_password">
+    </div>
+    <div class="form-group mb-3">
+      <label for="username">Username</label>
+      <input type="text" form-validation="required" class="form-control" id="username" placeholder="Username"
+        [(ngModel)]="edit.username">
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <button type="button" class="btn btn-sm btn-primary" routerLink="..">Back</button>
+      <button type="button" class="btn btn-sm btn-primary" (click)="submit()">Submit</button>
+    </div>
+  </form>
+</div>
+
+<div class="h-100" [hidden]="!showDetails">
+  <router-outlet></router-outlet>
+</div>

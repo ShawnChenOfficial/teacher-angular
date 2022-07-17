@@ -12,9 +12,18 @@
       </li>
     </ng-container>
     <ng-container *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a class="nav-link pointer" (click)="logout()">Logout</a>
-      </li>
+      <div class="dropdown nav-item">
+        <a class="nav-link pointer dropdown-toggle" id="userProfile" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="userProfile">
+          <li><a class="dropdown-item" routerLink="profile">Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </div>
+      </div>
     </ng-container>
   </ul>
 </div>

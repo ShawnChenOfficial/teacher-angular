@@ -35,7 +35,6 @@ export class RegisterOrganizationDetailsComponent implements OnInit {
       this.registerDataService.registerOrganizationAccount().subscribe({
         next: (res) => {
           this.isLoading = false;
-          console.log(res);
           if (res) this.router.navigate([LOGIN_ROUTE]);
         },
         error: (error) => {

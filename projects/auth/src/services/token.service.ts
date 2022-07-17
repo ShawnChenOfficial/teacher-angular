@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, Subject, Subscriber } from 'rxjs';
+import { observable, Observable, Subject, Subscriber } from 'rxjs';
 import {
   TOKEN_ACCESS,
   TOKEN_EXPIRES,
@@ -15,8 +15,6 @@ import { AuthToken } from '../models/auth.token';
 
 @Injectable()
 export class TokenService {
-  private token: Subject<AuthToken> | null = null;
-
   constructor(private http: HttpClient, @Inject('environment') private environment: any) { }
 
   getAccessToken(username: string, password: string) {
@@ -44,18 +42,17 @@ export class TokenService {
         sub.error('plase login');
       }
       if (this.tokenExpired()) {
-        this.refreshToken().subscribe(
-          (token) => {
+        this.refreshToken().subscribe({
+          next: token => {
             sub.next(token);
-            sub.complete();
           },
-          (error) => {
+          error: error => {
             sub.error(error);
           }
+        }
         );
       } else {
         sub.next(this.getStorageToken());
-        sub.complete();
       }
     });
   }
@@ -90,30 +87,23 @@ export class TokenService {
   }
 
   // refresh access token base on current refresh token and save to local storage
-  private refreshToken(): Subject<AuthToken> {
+  private refreshToken(): Observable<AuthToken> {
     var refresh_token = this.getRefreshToken();
-
-    if (this.token == null) this.token = new Subject();
 
     let params = new HttpParams();
     params = params.set('grant_type', 'refresh_token');
     params = params.set('refresh_token', refresh_token!);
 
-    this.http
-      .post(this.environment.baseEndPoint + 'api/account/token', params)
-      .subscribe(
-        (response) => {
-          this.saveToken(response);
-          this.token!.next(this.getStorageToken());
-          return this.token;
-        },
-        (error) => {
-          this.token!.error(error);
-          this.token = null;
-        }
-      );
-
-    return this.token;
+    return new Observable((sub: Subscriber<any>) => {
+      this.http
+        .post(this.environment.baseEndPoint + '/api/account/token', params)
+        .subscribe((token) => {
+          this.saveToken(token);
+          sub.next(this.getRefreshToken());
+        }, error => {
+          sub.error(error);
+        });
+    });
   }
 
   private saveToken(json: any) {

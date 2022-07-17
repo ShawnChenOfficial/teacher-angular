@@ -14,6 +14,7 @@ import { ToastService } from 'src/app/common/services/toast.service';
 export class LoginComponent implements OnInit {
   username!: string;
   password!: string;
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
     if (!this.validatorService.isValid) {
       return;
     } else {
+      this.isLoading = true;
       this.authService.login(this.username, this.password).subscribe({
         next: (response) => {
           this.router.navigate(['']);
@@ -35,6 +37,8 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           this.toastService.show('Login Failed', error, ToastEventType.Error);
         },
+      }).add(() => {
+        this.isLoading = false;
       });
     }
   }

@@ -1,0 +1,7 @@
+<div class="w-100" fxLayout="column" fxLayoutAlign="center start">
+    <p *ngIf="isNormalUser" class="m-0 p-3 w-100 pointer sidebar-item" routerLink="posts"><i
+            class="me-3 bi bi-signpost-2"></i>Posts</p>
+    <p *ngIf="isOrganizationUser" class="m-0 p-3 w-100 pointer sidebar-item"><i
+            class="me-3 bi bi-building"></i>Organization</p>
+    <p *ngIf="isAdmin" class="m-0 p-3 w-100 pointer sidebar-item"><i class="me-3 bi bi-person-lines-fill"></i>Users</p>
+</div>

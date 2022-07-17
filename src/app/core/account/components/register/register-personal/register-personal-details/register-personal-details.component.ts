@@ -19,7 +19,6 @@ export class RegisterPersonalDetailsComponent implements OnInit {
   isLoading = false;
 
   genderOptions = Object.keys(UserGender)
-    .map((key) => UserGender[key as any])
     .filter((value) => typeof value === 'string') as string[];
 
   constructor(

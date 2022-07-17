@@ -33,12 +33,17 @@ import { SubmitButtonComponent } from './common/components/submit-button/submit-
 import { OrganizationApiService } from './core/account/services/organization.service';
 import { SearchResultComponent } from './common/components/search/search.component';
 import { PostService } from './core/shared/services/post.sevice';
-import { PostModalComponent } from './core/home/components/posts/post-modal/post-modal.component';
+import { PostModalComponent } from './core/shared/components/post-modal/post-modal.component';
 import { ModalDirective } from './common/directives/modal.directive';
 import { ModalComponent } from './common/components/modal/modal.component';
 import { ModalService } from './common/services/modal.service';
 import { ModalHeaderComponent } from './common/components/modal/modal-header/modal-header.component';
 import { ModalFooterComponent } from './common/components/modal/modal-footer/modal-footer.component';
+import { ProfileComponent } from './core/profile/components/profile.component';
+import { ProfileSidebarComponent } from './core/profile/components/profile-sidebar/profile-sidebar.component';
+import { ProfileService } from './core/profile/services/profile.service';
+import { UserPostsComponent } from './core/profile/components/user-posts/user-posts.component';
+import { UserPostComponent } from './core/profile/components/user-posts/user-post/user-post.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +71,10 @@ import { ModalFooterComponent } from './common/components/modal/modal-footer/mod
     ModalDirective,
     ModalHeaderComponent,
     ModalFooterComponent,
+    ProfileComponent,
+    ProfileSidebarComponent,
+    UserPostsComponent,
+    UserPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +93,8 @@ import { ModalFooterComponent } from './common/components/modal/modal-footer/mod
     RegisterApiService,
     OrganizationApiService,
     ToastService,
-    ModalService
+    ModalService,
+    ProfileService
   ],
   bootstrap: [AppComponent],
 })
