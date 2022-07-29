@@ -5,6 +5,13 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.modal-area {
+    max-height: 85%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
 .modal-sm {
     min-width: 540px;
     max-width: 540px;

@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+$font-size-base: .85rem;
+$input-btn-padding-y: 0.3rem;
+$input-btn-padding-x: 0.4rem;
+$spacer: 0.85rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+@import "~bootstrap/scss/bootstrap.scss";
+
 html,
 body {
   height: 100%;

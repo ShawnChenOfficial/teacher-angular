@@ -24,11 +24,11 @@ export class RegisterPersonalComponent implements OnInit {
     return this.router.url.toLocaleLowerCase().indexOf('details') != -1;
   }
 
-  submit(){
-    if(!this.validatorService.isValid){
+  submit() {
+    if (!this.validatorService.isValid) {
       return;
     }
-    else{
+    else {
       this.router.navigate(['account', 'register', 'personal', 'details']);
     }
   }

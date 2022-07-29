@@ -5,7 +5,6 @@ export class RegisterPersonalPost {
   email: string;
   password: string;
   re_password: string;
-  username: string;
   firstname: string;
   lastname: string;
   title: string;
@@ -18,7 +17,6 @@ export class RegisterPersonalPost {
     this.email = edit.email;
     this.password = edit.password;
     this.re_password = edit.re_password;
-    this.username = edit.username;
     this.firstname = edit.firstname;
     this.lastname = edit.lastname;
     this.title = edit.title;

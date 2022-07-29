@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, SimpleChange, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, Injector, Input, OnInit, Renderer2, SimpleChange, ViewChild, ViewContainerRef } from '@angular/core';
 import { ModalDirective } from '../../directives/modal.directive';
 import { INJECT_DATA } from '../../persistance/persistance';
 
@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
 
   @ViewChild(ModalDirective, { static: true }) modalDirective: ModalDirective;
 
-  constructor(public viewContainerRef: ViewContainerRef) { }
+  constructor(public viewContainerRef: ViewContainerRef, private render: Renderer2) { }
 
   ngOnInit(): void {
     this.loadComponent();
@@ -34,6 +34,9 @@ export class ModalComponent implements OnInit {
     }])
 
     const ref = viewContainerRef.createComponent(this.component, { injector: injector });
-  }
 
+    this.render.setStyle(ref.location.nativeElement, 'display', 'flex');
+    this.render.setStyle(ref.location.nativeElement, 'flex-direction', 'column');
+    this.render.setStyle(ref.location.nativeElement, 'overflow-y', 'auto');
+  }
 }

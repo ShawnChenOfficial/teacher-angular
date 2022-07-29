@@ -8,16 +8,6 @@ export class ValidatorService {
   constructor() { }
 
   get isValid() {
-    let result = true;
-
-    if (this.validators.length > 0) {
-      this.validators.forEach((f) => {
-        if (!f.validate()) {
-          result = false;
-        }
-      });
-    }
-
-    return result;
+    return this.validators.filter(f => !f.validate()).length == 0;
   }
 }
